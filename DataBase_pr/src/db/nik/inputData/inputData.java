@@ -17,7 +17,7 @@ public class inputData extends mainFrm {
 
     public inputData() throws HeadlessException {
         initJTable();
-        scPnInputData.setViewportView(table1);
+        //scPnInputData.setViewportView(table1);
     }
 
     private void initJTable(){
@@ -28,7 +28,7 @@ public class inputData extends mainFrm {
         table1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         table1.setFocusable(false);
 
-        scPnInputData.setViewportView(table1);
+        //scPnInputData.setViewportView(table1);
     }
 
     //public JTable returnJTable (){
