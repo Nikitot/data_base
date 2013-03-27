@@ -21,14 +21,6 @@ public class PlantsTable {
     private         JTable      plantsTable;
     private         JPanel      plantsTablePane;
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("PlantsTable");
-        frame.setContentPane(new PlantsTable().plantsTablePane);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
-
     private static JTable initJTable (){
         Object[][] data = null;
         ArrayList<String> row = new ArrayList<String>();
@@ -84,6 +76,10 @@ public class PlantsTable {
 
     public JTable getPlantsTable() {
         return plantsTable;
+    }
+
+    public JPanel getPlantsTablePane() {
+        return plantsTablePane;
     }
 
     public String[] getColumnNames() {

@@ -1,8 +1,9 @@
 package db.nik;
 
+import db.nik.waterTretmentPlants.PlantsTable;
+
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,30 +14,25 @@ import java.awt.*;
  */
 
 
-public class mainFrm extends JFrame{
+public class mainFrm{
 
-    //Таблица исходных данных
-    private JTabbedPane tabbedInputData;
-    protected JScrollPane scPnInputData;
+    //protected JScrollPane scPnInputData;
+    private JPanel mainPane;
+    private JTabbedPane tabbedPane;
+    private PlantsTable plantsTable;
 
-    public mainFrm() throws HeadlessException {
-        initData();
-//fasdfasdfasdhfaksdfasdhgfajshdgfajkshgdfakjsdgfasd
+    public mainFrm() {
+        plantsTable = new PlantsTable();
     }
-
-
 
     public static void main(String args[]){
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new mainFrm().setVisible(true);
-            }
-        });
-
+        JFrame frame = new JFrame("PlantsTable");
+        frame.setContentPane(new mainFrm().mainPane);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
-
+    /*
     @SuppressWarnings("unchecked")
     private void initData(){
 
@@ -58,9 +54,6 @@ public class mainFrm extends JFrame{
         );
     }
 
-
-
-
     //Функция добавления строки в конец
     private void addRow(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -73,9 +66,11 @@ public class mainFrm extends JFrame{
         model.removeRow(i);
         table.setModel(model);
     }
-
+    */
 
     private void createUIComponents() {
+        tabbedPane = new JTabbedPane();
+        tabbedPane.add("Приборы", plantsTable.getPlantsTablePane());
         // TODO: place custom component creation code here
     }
 }
