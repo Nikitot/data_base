@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * Time: 18:35
  * To change this template use File | Settings | File Templates.
  */
+
 public class PlantsTable {
     private static  String[]    columnNames= {"Марка",  "Зав. №", "Тип", "", "Запах  баллы", "Мутность мг/л", "Цветность град",
             "Окисл перм   О2 мг/л", "рН", "Жесткость, мг-экв/л", "Минер-ция, мг/л", "Fe, мг/л", "Mn, мг/л", "Хлориды мг/л",

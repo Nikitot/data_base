@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DataBase_pr.iml" filepath="$PROJECT_DIR$/DataBase_pr.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../DataBase/src/db/waterTretmentPlants/waterTretmentPlants.iml" filepath="$PROJECT_DIR$/../DataBase/src/db/waterTretmentPlants/waterTretmentPlants.iml" />
     </modules>
   </component>
 </project>
