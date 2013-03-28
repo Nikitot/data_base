@@ -1,7 +1,8 @@
-package db.nik;
+package db;
 
-import db.nik.inputData.InputTable;
-import db.nik.waterTretmentPlants.PlantsTable;
+import db.FilteringSystems.FilteringSystemsFrame;
+import db.inputData.InputTable;
+import db.waterTretmentPlants.PlantsTable;
 
 import javax.swing.*;
 
@@ -22,6 +23,7 @@ public class mainFrm{
     private JTabbedPane tabbedPane;
     private PlantsTable plantsTable;
     private InputTable inputTable;
+    private FilteringSystemsFrame fsFrame;
 
     public mainFrm() {
 
@@ -54,11 +56,13 @@ public class mainFrm{
     private void createUIComponents() {
         plantsTable = new PlantsTable();
         inputTable = new InputTable();
+        fsFrame = new FilteringSystemsFrame();
 
         tabbedPane = new JTabbedPane();
 
-        tabbedPane.add("ИСХДАН", inputTable.getinputTablePane());
+        tabbedPane.add("ИСХДАН", inputTable.getInputTablePane());
         tabbedPane.add("БВПУ МВПУ", plantsTable.getPlantsTablePane());
+        tabbedPane.add("СФУФМ", fsFrame.getFsPane());
         // TODO: place custom component creation code here
     }
 }
