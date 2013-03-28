@@ -1,5 +1,6 @@
 package db.nik;
 
+import db.nik.inputData.InputTable;
 import db.nik.waterTretmentPlants.PlantsTable;
 
 import javax.swing.*;
@@ -20,9 +21,10 @@ public class mainFrm{
     private JPanel mainPane;
     private JTabbedPane tabbedPane;
     private PlantsTable plantsTable;
+    private InputTable inputTable;
 
     public mainFrm() {
-        plantsTable = new PlantsTable();
+
     }
 
     public static void main(String args[]){
@@ -31,29 +33,10 @@ public class mainFrm{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
     }
+
     /*
-    @SuppressWarnings("unchecked")
-    private void initData(){
-
-        GroupLayout layout = new GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(tabbedInputData, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(tabbedInputData, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-                                .addContainerGap())
-        );
-    }
-
     //Функция добавления строки в конец
     private void addRow(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -69,8 +52,13 @@ public class mainFrm{
     */
 
     private void createUIComponents() {
+        plantsTable = new PlantsTable();
+        inputTable = new InputTable();
+
         tabbedPane = new JTabbedPane();
-        tabbedPane.add("Приборы", plantsTable.getPlantsTablePane());
+
+        tabbedPane.add("ИСХДАН", inputTable.getinputTablePane());
+        tabbedPane.add("БВПУ МВПУ", plantsTable.getPlantsTablePane());
         // TODO: place custom component creation code here
     }
 }
