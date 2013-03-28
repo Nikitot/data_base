@@ -1,4 +1,4 @@
-package db.nik.waterTretmentPlants;
+package db.waterTretmentPlants;
 
 import javax.swing.*;
 import java.io.FileInputStream;
