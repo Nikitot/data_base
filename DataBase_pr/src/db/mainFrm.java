@@ -1,6 +1,7 @@
 package db;
 
 import db.FilteringSystems.FilteringSystemsFrame;
+import db.LightActions.LaTbFrame;
 import db.inputData.InputTable;
 import db.waterTretmentPlants.PlantsTable;
 
@@ -24,6 +25,8 @@ public class mainFrm{
     private PlantsTable plantsTable;
     private InputTable inputTable;
     private FilteringSystemsFrame fsFrame;
+    private LaTbFrame laFrame;
+
 
     public mainFrm() {
 
@@ -38,31 +41,19 @@ public class mainFrm{
 
     }
 
-    /*
-    //Функция добавления строки в конец
-    private void addRow(JTable table) {
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.addRow(new Object[]{"", "", ""});
-        table.setModel(model);
-    }
-    //Функция удаления i строки
-    private void removeRow(JTable table, int i) {
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.removeRow(i);
-        table.setModel(model);
-    }
-    */
 
     private void createUIComponents() {
         plantsTable = new PlantsTable();
         inputTable = new InputTable();
         fsFrame = new FilteringSystemsFrame();
+        laFrame = new LaTbFrame();
 
         tabbedPane = new JTabbedPane();
 
         tabbedPane.add("ИСХДАН", inputTable.getInputTablePane());
         tabbedPane.add("БВПУ МВПУ", plantsTable.getPlantsTablePane());
         tabbedPane.add("СФУФМ", fsFrame.getFsPane());
+        tabbedPane.add("ОСВЕТЛ",laFrame.getLaPane());
         // TODO: place custom component creation code here
     }
 }
