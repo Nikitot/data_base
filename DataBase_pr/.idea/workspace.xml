@@ -5,19 +5,35 @@
     <ignored path="DataBase_pr.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/input_data.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364331898670" ignored="false" />
-    <file path="/fragment.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364509545121" ignored="false" />
-    <file path="/Dummy.txt" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364511017029" ignored="false" />
+    <file path="/fragment.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364741376645" ignored="false" />
+    <file path="/Dummy.txt" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364819459272" ignored="false" />
     <file path="/MainGUI.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364326368426" ignored="false" />
-    <file path="/mainFrm.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364509842774" ignored="false" />
+    <file path="/mainFrm.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364553606525" ignored="false" />
     <file path="/test.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364331495778" ignored="false" />
     <file path="/inputData.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364341562584" ignored="false" />
-    <file path="/PlantsTable.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364451477364" ignored="false" />
+    <file path="/PlantsTable.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364508623323" ignored="false" />
     <file path="/InputTable.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364502286487" ignored="false" />
-    <file path="/GridFiltersFrame.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364502400900" ignored="false" />
-    <file path="/TableModify.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364502069959" ignored="false" />
-    <file path="/FilteringSystemsFrame.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364503216121" ignored="false" />
-    <file path="$PROJECT_DIR$/src/db/mainFrmTest.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364509553830" ignored="false" />
-    <file path="/LightActionFrame.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364510559146" ignored="false" />
+    <file path="/GridFiltersFrame.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364505130371" ignored="false" />
+    <file path="/TableModify.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364512831899" ignored="false" />
+    <file path="/FilteringSystemsFrame.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364588454305" ignored="false" />
+    <file path="/cwFiltersF76.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364505492045" ignored="false" />
+    <file path="/AotuWashMotorTH.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364507371259" ignored="false" />
+    <file path="/GridFiltersWMTH.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364509086603" ignored="false" />
+    <file path="/WMFiltersTH.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364509348257" ignored="false" />
+    <file path="/BBPackageTH.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364509807462" ignored="false" />
+    <file path="/BBAdditionalParts.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364509946616" ignored="false" />
+    <file path="/CFFiltersTH.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364510302333" ignored="false" />
+    <file path="/HIFPackageTH.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364510453718" ignored="false" />
+    <file path="/NORITMembrane.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364510855317" ignored="false" />
+    <file path="/XFLOWMembrane.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364511339573" ignored="false" />
+    <file path="/ERUMembrane.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364511576393" ignored="false" />
+    <file path="/LaTbFrame.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364761245675" ignored="false" />
+    <file path="/TechTaskDecisionFrame.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364553446516" ignored="false" />
+    <file path="/LableFirstWaterFrame.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364587008241" ignored="false" />
+    <file path="/LFWFrameForTS.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364588562479" ignored="false" />
+    <file path="/FiltersParametrs.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364589281541" ignored="false" />
+    <file path="/FltrsPrmsFOV.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364742725055" ignored="false" />
+    <file path="/DUTubingNomogramm.java" changelist="b586ec85-98b5-41f0-a9e5-ebd4aa5e1e80" time="1364744976036" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +108,7 @@
           <favorite_root url="file://$PROJECT_DIR$/.idea/ant.xml" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
         </favorite_root>
         <favorite_root url="file://$PROJECT_DIR$/src" module="DataBase_pr" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
-          <favorite_root url="file://$PROJECT_DIR$/src/db" module="DataBase_pr" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+          <favorite_root url="file://$PROJECT_DIR$/src/db/MainTabs" module="DataBase_pr" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
             <favorite_root url="file://$PROJECT_DIR$/src/db/table1" module="DataBase_pr" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
               <favorite_root url="file://$PROJECT_DIR$/src/db/table1/input_data.java" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
               <favorite_root url="file://$PROJECT_DIR$/src/db/table1/input_data.form" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
@@ -106,28 +122,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="LaTbFrame.form" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/db/LightActions/LaTbFrame.form">
-          <provider selected="true" editor-type-id="ui-designer">
-            <state />
+      <file leaf-file-name="DUTubingNomogramm.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/db/MainTabs/LightActions/DUTubingNomogramm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="LaTbFrame.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/db/LightActions/LaTbFrame.java">
+        <entry file="file://$PROJECT_DIR$/src/db/MainTabs/LaTbFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="101" selection-start="316" selection-end="316" vertical-scroll-proportion="0.45358092">
+            <state line="28" column="68" selection-start="742" selection-end="742" vertical-scroll-proportion="0.32258064">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LightActionFrame.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/db/LightActions/LightAction/LightActionFrame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="56" selection-start="552" selection-end="552" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
+      <file leaf-file-name="DUTubingNomogramm.form" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/db/MainTabs/LightActions/DUTubingNomogramm.form">
+          <provider selected="true" editor-type-id="ui-designer">
+            <state />
           </provider>
         </entry>
       </file>
@@ -151,22 +167,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/db/nik/inputData/FiltringSystems.form" />
-        <option value="$PROJECT_DIR$/src/db/nik/FilteringSystems/FilteringSystemsFrame.form" />
-        <option value="$PROJECT_DIR$/src/db/nik/FilteringSystems/GridFilters/GridFiltersFrame.form" />
-        <option value="$PROJECT_DIR$/src/db/nik/FilteringSystems/GridFilters/GridFiltersFrame.java" />
-        <option value="$PROJECT_DIR$/src/additionalFunc/TableModify.java" />
-        <option value="$PROJECT_DIR$/src/db/inputData/InputTable.java" />
-        <option value="$PROJECT_DIR$/src/db/FilteringSystems/GridFilters/GridFiltersFrame.java" />
-        <option value="$PROJECT_DIR$/src/db/FilteringSystems/FilteringSystemsFrame.form" />
-        <option value="$PROJECT_DIR$/src/db/nik/mainFrm.java" />
-        <option value="$PROJECT_DIR$/src/db/FilteringSystems/FilteringSystemsFrame.java" />
-        <option value="$PROJECT_DIR$/src/db/inputData/InputTable.form" />
-        <option value="$PROJECT_DIR$/src/db/LightActions/LightAction/LightActionFrame.form" />
-        <option value="$PROJECT_DIR$/src/db/mainFrmTest.java" />
-        <option value="$PROJECT_DIR$/src/db/mainFrm.java" />
-        <option value="$PROJECT_DIR$/src/db/LightActions/LightAction/LightActionFrame.java" />
-        <option value="$PROJECT_DIR$/src/db/LightActions/LaTbFrame.java" />
+        <option value="$PROJECT_DIR$/src/db/MainTabs/FilteringSystems/CWFiltersF76.form" />
+        <option value="$PROJECT_DIR$/src/db/MainTabs/LightActions/TechTaskDecisionFrame.form" />
+        <option value="$PROJECT_DIR$/src/db/MainTabs/LightActions/XFLOWMembrane.form" />
+        <option value="$PROJECT_DIR$/src/db/MainTabs/FilteringSystems/XFLOWMembrane.form" />
+        <option value="$PROJECT_DIR$/src/db/MainTabs/LightActions/LFWFrameForTS.form" />
+        <option value="$PROJECT_DIR$/src/db/MainTabs/LightActions/LableFirstWaterFrame.form" />
+        <option value="$PROJECT_DIR$/src/db/MainTabs/LightActions/LableFirstWaterFrame.java" />
+        <option value="$PROJECT_DIR$/src/db/MainTabs/FilteringSystemsFrame.java" />
+        <option value="$PROJECT_DIR$/src/db/MainTabs/LightActions/LFWFrameForTS.java" />
+        <option value="$PROJECT_DIR$/src/db/MainTabs/LightActions/FiltersParametrs.form" />
+        <option value="$PROJECT_DIR$/src/db/MainTabs/LightActions/FiltersParametrs.java" />
+        <option value="$PROJECT_DIR$/src/db/MainTabs/LightActions/FltrsPrmsFOV.java" />
+        <option value="$PROJECT_DIR$/src/db/MainTabs/LightActions/FltrsPrmsFOV.form" />
+        <option value="$PROJECT_DIR$/src/db/MainTabs/LightActions/DUTubingNomogramm.form" />
+        <option value="$PROJECT_DIR$/src/db/MainTabs/LaTbFrame.java" />
+        <option value="$PROJECT_DIR$/src/db/MainTabs/LightActions/DUTubingNomogramm.java" />
       </list>
     </option>
   </component>
@@ -202,6 +218,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -233,8 +250,48 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DataBase_pr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DataBase_pr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mainFrm" />
+              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DataBase_pr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DataBase_pr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MainTabs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -256,7 +313,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="LightActions" />
+              <option name="myItemId" value="MainTabs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -282,15 +339,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="LightActions" />
+              <option name="myItemId" value="MainTabs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="LightAction" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LightActionFrame" />
+              <option name="myItemId" value="InputTable" />
               <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -312,7 +365,37 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="FilteringSystems" />
+              <option name="myItemId" value="MainTabs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FilteringSystemsFrame" />
+              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DataBase_pr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DataBase_pr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MainTabs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LightActions" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -334,11 +417,71 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="FilteringSystems" />
+              <option name="myItemId" value="MainTabs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="GridFilters" />
+              <option name="myItemId" value="LightActions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LFWFrameForTS" />
+              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DataBase_pr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DataBase_pr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MainTabs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LightActions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DUTubingNomogramm" />
+              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DataBase_pr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DataBase_pr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MainTabs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FilteringSystems" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -362,24 +505,21 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit3" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.lastSelected" value="vcs.Git" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="last_opened_file_path" value="C:/Program Files (x86)/Git/cmd/gitk.cmd" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
@@ -388,21 +528,15 @@
     <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
-    <key name="CreateTestDialog.RecentsKey">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="db" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Dh\Documents\GitHub\data_base\DataBase_pr\src\db\LightActions" />
-      <recent name="C:\Users\Dh\Documents\GitHub\data_base\DataBase_pr\src\db\FilteringSystems" />
-      <recent name="C:\Users\Dh\Documents\GitHub\data_base\DataBase_pr\src\db\LightActions\LightAction" />
+      <recent name="C:\Users\Dh\Documents\GitHub\data_base\DataBase_pr\src\db\MainTabs\LightActions" />
+      <recent name="C:\Users\Vasya\Documents\GitHub\data_base\DataBase_pr\src\db\FilteringSystems" />
+      <recent name="C:\Users\Vasya\Documents\GitHub\data_base\DataBase_pr\src\db\MainTabs" />
       <recent name="C:\Users\Vasya\Documents\GitHub\data_base\DataBase_pr\src\db" />
       <recent name="C:\Users\Dh\IdeaProjects\DataBase_pr\src\db\nik\waterTretmentPlants" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="db" />
     </key>
   </component>
   <component name="RunManager" selected="Application.mainFrm">
@@ -669,24 +803,24 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2219697" sideWeight="0.6666667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919955" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2090909" sideWeight="0.67504185" order="3" side_tool="false" content_ui="tabs" x="544" y="167" width="277" height="404" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20833333" sideWeight="0.6666667" order="3" side_tool="false" content_ui="tabs" x="544" y="167" width="277" height="404" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39865997" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32694477" sideWeight="0.5007576" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33333334" sideWeight="0.3098485" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919955" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.4939394" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919955" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28030303" sideWeight="0.67504185" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32495812" sideWeight="0.4939394" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3098485" sideWeight="0.67504185" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19621213" sideWeight="0.6666667" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33333334" sideWeight="0.6848485" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32807216" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -754,88 +888,104 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/db/LightActions/LightAction/LightActionFrame.java">
+    <entry file="file://$PROJECT_DIR$/src/db/MainTabs/FilteringSystemsFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="56" selection-start="552" selection-end="552" vertical-scroll-proportion="0.0">
+        <state line="39" column="43" selection-start="1296" selection-end="1296" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/waterTretmentPlants/PlantsTable.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/mainFrm.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/waterTretmentPlants/PlantsTable.java">
+    <entry file="file://$PROJECT_DIR$/src/db/MainTabs/LightActions/LableFirstWaterFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="40" selection-start="2746" selection-end="2746" vertical-scroll-proportion="0.0" />
+        <state line="31" column="64" selection-start="532" selection-end="829" vertical-scroll-proportion="1.233871">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/FilteringSystems/FilteringSystemsFrame.java">
+    <entry file="file://$PROJECT_DIR$/src/db/MainTabs/LightActions/TechTaskDecisionFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="8" selection-start="529" selection-end="529" vertical-scroll-proportion="0.0" />
+        <state line="12" column="13" selection-start="258" selection-end="258" vertical-scroll-proportion="0.33147633">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/inputData/InputTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="44" selection-start="652" selection-end="652" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/additionalFunc/TableModify.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="46" selection-start="740" selection-end="740" vertical-scroll-proportion="0.58894646" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/FilteringSystems/GridFilters/GridFiltersFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="64" selection-end="64" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/inputData/InputTable.form">
+    <entry file="file://$PROJECT_DIR$/src/db/MainTabs/LightActions/FiltersParametrs.form">
       <provider selected="true" editor-type-id="ui-designer">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/FilteringSystems/GridFilters/GridFiltersFrame.form">
+    <entry file="file://$PROJECT_DIR$/src/db/MainTabs/LightActions/FiltersParametrs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="14" selection-start="769" selection-end="769" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db/MainTabs/LightActions/FltrsPrmsFOV.form">
       <provider selected="true" editor-type-id="ui-designer">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/FilteringSystems/FilteringSystemsFrame.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
+    <entry file="file://$PROJECT_DIR$/src/db/MainTabs/LightActions/FltrsPrmsFOV.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="29" selection-start="441" selection-end="441" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/LightActions/LaTbFrame.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
+    <entry file="file://$PROJECT_DIR$/src/db/MainTabs/InputTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="13" selection-start="287" selection-end="287" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/db/mainFrm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="30" selection-start="1396" selection-end="1396" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/LightActions/LightAction/LightActionFrame.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/LightActions/LightAction/LightActionFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="56" selection-start="552" selection-end="552" vertical-scroll-proportion="0.0">
+        <state line="61" column="0" selection-start="1543" selection-end="1543" vertical-scroll-proportion="0.4704301">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/LightActions/LaTbFrame.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.7.0_15/src.zip!/javax/swing/ImageIcon.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="101" selection-start="316" selection-end="316" vertical-scroll-proportion="0.45358092">
+        <state line="204" column="0" selection-start="6414" selection-end="6414" vertical-scroll-proportion="0.31451613" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db/MainTabs/LightActions/LFWFrameForTS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="14" selection-start="509" selection-end="569" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db/MainTabs/LightActions/LFWFrameForTS.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db/MainTabs/FilteringSystems/CWFiltersF76.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db/MainTabs/LightActions/DUTubingNomogramm.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db/MainTabs/LightActions/DUTubingNomogramm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db/MainTabs/LaTbFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="68" selection-start="742" selection-end="742" vertical-scroll-proportion="0.32258064">
           <folding />
         </state>
       </provider>
