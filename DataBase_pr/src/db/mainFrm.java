@@ -39,7 +39,7 @@ public class mainFrm{
         frame.setVisible(true);
 
     }
-
+                           //dfgsdfgsdfghsdfkhgsdpfijhgsdifjhgsdfighsdlkfjgsd
     /*
     //Функция добавления строки в конец
     private void addRow(JTable table) {
