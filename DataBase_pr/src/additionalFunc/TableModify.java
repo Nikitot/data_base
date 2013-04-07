@@ -16,6 +16,14 @@ public class TableModify {
         model.addRow(new Object[model.getColumnCount()]);
         table.setModel(model);
     }
+
+    //Функция удаления i строки
+    static public void removeRow(JTable table, int i) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.removeRow(i);
+        table.setModel(model);
+    }
+
     static public JTable initTable(Object[][] data, String[] columnNames) {
         JTable table = new javax.swing.JTable() {};
         table.setModel(new javax.swing.table.DefaultTableModel(data,columnNames));
