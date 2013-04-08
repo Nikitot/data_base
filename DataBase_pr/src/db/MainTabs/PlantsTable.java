@@ -48,47 +48,55 @@ public class PlantsTable {
     public PlantsTable() {
         Find.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                actionFind("Мутность мг/л");
-                actionFind("Цветность град");
-                actionFind("Окисл перм   О2 мг/л");
-                actionFind("Жесткость, мг-экв/л");
-                actionFind("Fe, мг/л");
-                actionFind("Mn, мг/л");
+                actionFind("Мутность мг/л",Turbidity, deltaTurbidity);
+                actionFind("Цветность град",Chroma,deltaChroma);
+                actionFind("Окисл перм   О2 мг/л", Oxidation, deltaOxidation);
+                actionFind("Жесткость, мг-экв/л", Hardness, deltaHardness);
+                actionFind("Fe, мг/л", Fe, deltaFe);
+                actionFind("Mn, мг/л", Mn, deltaMn);
             }
         });
     }
 
-    public void actionFind(String strName){
+    public void actionFind(String strName, double value, double deltaValue){
         for(int i = 0 ; i < plantsTable.getColumnCount(); i ++)  {
             String columnName = plantsTable.getColumnName(i);
             if(columnName.equals(strName)) {
                 try{
 
                     String cellValue = plantsTable.getValueAt(0,i).toString();
-                    Scanner sc = new Scanner(cellValue);
+                    String cellDeltaValue = plantsTable.getValueAt(1,i).toString();
+                    value = getDouble(value, cellValue);
+                    deltaValue = getDouble(deltaValue,cellDeltaValue);
 
-                    if(sc.hasNext()){
-                        Turbidity = sc.nextDouble();
-                    }
                 }catch (Exception ex){
-                    JOptionPane.showMessageDialog(null,"Неверно введены параметры исходной воды","Error",2);
+                    //JOptionPane.showMessageDialog(null,"Неверно введены параметры исходной воды","Error",2);
                 }
 
-                for(int j = 1; j < plantsTable.getRowCount(); j++){
-                try{
-                    Scanner sc = new Scanner(plantsTable.getValueAt(j,i).toString());
-                    if(sc.nextDouble() > Turbidity + deltaTurbidity || sc.nextDouble() < Turbidity - deltaTurbidity){
-                        TableModify.removeRow(plantsTable,j);
+                for(int j = 2; j < plantsTable.getRowCount(); j++){
+                    try{
+                        Scanner sc = new Scanner(plantsTable.getValueAt(j,i).toString());
+                        //System.out.println((value + deltaValue) + " " + (value - deltaValue));
+                        if(sc.nextDouble() > value + deltaValue || sc.nextDouble() < value - deltaValue){
+                            TableModify.removeRow(plantsTable,j);
+                        }
+                    }catch (Exception ex){
+                        //JOptionPane.showMessageDialog(null,"Неверно введены параметры установки" + j,"Error",2);
                     }
-                }catch (Exception ex){
-                    //JOptionPane.showMessageDialog(null,"Неверно введены параметры установки" + j,"Error",2);
                 }
-                }
-
-
             }
         }
     }
+
+    private double getDouble(double value, String strValue) {
+        Scanner sc = new Scanner(strValue);
+
+        if(sc.hasNext()){
+            value = sc.nextDouble();
+        }
+        return value;
+    }
+
     public JTable getPlantsTable() {
         return plantsTable;
     }
