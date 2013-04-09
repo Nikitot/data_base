@@ -3,13 +3,7 @@ package db.MainTabs;
 import additionalFunc.TableModify;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.util.ArrayList;
+import java.awt.event.*;
 import java.util.Scanner;
 
 /**
@@ -21,15 +15,15 @@ import java.util.Scanner;
  */
 
 public class PlantsTable {
-    private static  String[]    columnNames= {"Марка",  "Зав. №", "Тип", "Произв-ть м3/чзс", "Запах  баллы", "Мутность мг/л", "Цветность град",
+    private static String[] columnNames = {"Марка", "Зав. №", "Тип", "Произв-ть м3/чзс", "Запах  баллы", "Мутность мг/л", "Цветность град",
             "Окисл перм   О2 мг/л", "рН", "Жесткость, мг-экв/л", "Минер-ция, мг/л", "Fe, мг/л", "Mn, мг/л", "Хлориды мг/л",
             "Сульф мг/л", "Аммиак  мг/л", "Источник (С, Р,О)", "КОЭ", "Шел-ть мг/л", "B        мг/л", "Br           мг/л",
             "Li        мг/л", "Ba      мг/л", "Si       мг/л"};
-    Object[][] data =   {{null}};
+    Object[][] data = {{null}};
 
-    private         JTable      plantsTable;
-    private         JPanel      plantsTablePane;
-    private         JButton     Find;
+    private JTable plantsTable;
+    private JPanel plantsTablePane;
+    private JButton Find;
 
     private double deltaTurbidity = 1; //delta мутности
     private double deltaChroma = 10; //delta цветности
@@ -38,50 +32,57 @@ public class PlantsTable {
     private double deltaFe = 2; //delta Fe
     private double deltaMn = 1; //delta Mn
 
-    private double Turbidity = 0;
-    private double Chroma = 0;
-    private double Oxidation = 0;
-    private double Hardness = 0;
-    private double Fe = 0;
-    private double Mn = 0;
 
     public PlantsTable() {
+
         Find.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                actionFind("Мутность мг/л",Turbidity, deltaTurbidity);
-                actionFind("Цветность град",Chroma,deltaChroma);
-                actionFind("Окисл перм   О2 мг/л", Oxidation, deltaOxidation);
-                actionFind("Жесткость, мг-экв/л", Hardness, deltaHardness);
-                actionFind("Fe, мг/л", Fe, deltaFe);
-                actionFind("Mn, мг/л", Mn, deltaMn);
+
+                for(int i = 0; i < plantsTable.getColumnCount(); i++){
+                    if(i > 2 && i != 16)
+                    actionFind(columnNames[i].toString(),0,0);
+                }
             }
         });
     }
 
-    public void actionFind(String strName, double value, double deltaValue){
-        for(int i = 0 ; i < plantsTable.getColumnCount(); i ++)  {
+    public void actionFind(String strName, double value, double deltaValue) {
+        for (int i = 0; i < plantsTable.getColumnCount(); i++) {
             String columnName = plantsTable.getColumnName(i);
-            if(columnName.equals(strName)) {
-                try{
+            if (columnName.equals(strName)) {
+                try {
 
-                    String cellValue = plantsTable.getValueAt(0,i).toString();
-                    String cellDeltaValue = plantsTable.getValueAt(1,i).toString();
+                    String cellValue = plantsTable.getValueAt(0, i).toString();
+                    String cellDeltaValue = plantsTable.getValueAt(1, i).toString();
                     value = getDouble(value, cellValue);
-                    deltaValue = getDouble(deltaValue,cellDeltaValue);
-
-                }catch (Exception ex){
-                    //JOptionPane.showMessageDialog(null,"Неверно введены параметры исходной воды","Error",2);
+                    deltaValue = getDouble(deltaValue, cellDeltaValue);
+                } catch (Exception ex) {
+                    plantsTable.setValueAt(0, 0, i);
+                    if(i == 5){
+                        plantsTable.setValueAt(deltaTurbidity, 1, i);
+                    }else if(i == 6){
+                        plantsTable.setValueAt(deltaChroma, 1, i);
+                    }else if(i == 7){
+                        plantsTable.setValueAt(deltaOxidation, 1, i);
+                    }else if(i == 9){
+                        plantsTable.setValueAt(deltaHardness, 1, i);
+                    }else if(i == 11){
+                        plantsTable.setValueAt(deltaFe, 1, i);
+                    }else if(i == 12){
+                        plantsTable.setValueAt(deltaMn, 1, i);
+                    }else{
+                        plantsTable.setValueAt(0, 1, i);
+                    }
                 }
 
-                for(int j = 2; j < plantsTable.getRowCount(); j++){
-                    try{
-                        Scanner sc = new Scanner(plantsTable.getValueAt(j,i).toString());
-                        //System.out.println((value + deltaValue) + " " + (value - deltaValue));
-                        if(sc.nextDouble() > value + deltaValue || sc.nextDouble() < value - deltaValue){
-                            TableModify.removeRow(plantsTable,j);
+                for (int j = 2; j < plantsTable.getRowCount(); j++) {
+                    try {
+                        Scanner sc = new Scanner(plantsTable.getValueAt(j, i).toString());
+                        if (sc.nextDouble() > value + deltaValue || sc.nextDouble() < value - deltaValue) {
+                            TableModify.removeRow(plantsTable, j);
                         }
-                    }catch (Exception ex){
-                        //JOptionPane.showMessageDialog(null,"Неверно введены параметры установки" + j,"Error",2);
+                    } catch (Exception ex) {
+                        TableModify.removeRow(plantsTable,j);
                     }
                 }
             }
@@ -91,7 +92,7 @@ public class PlantsTable {
     private double getDouble(double value, String strValue) {
         Scanner sc = new Scanner(strValue);
 
-        if(sc.hasNext()){
+        if (sc.hasNext()) {
             value = sc.nextDouble();
         }
         return value;
