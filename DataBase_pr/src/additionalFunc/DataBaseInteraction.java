@@ -71,4 +71,23 @@ public class DataBaseInteraction {
         }
         return 1;
     }
+
+    public static void main(){
+        PlantRecord plantRecord = new PlantRecord();
+        plantRecord.setValuesFromStrings(new String[]{"ВВПУ", "81", "З", "15", "1", "7,9"
+                                                    , "39", "10,2", "7,5", "0,74", "71,2", "1,5"
+                                                    , "0", "7,34", "10,4", null, "Вод-д", null
+                                                    , null, null, null, null, null, null});
+        System.out.println(plantRecord);
+        plantRecord.putRecordInDb();
+        System.out.println("send to db");
+        ResultSet resultSet = DataBaseInteraction.getAllTable("PLANT");
+        try {
+            while (resultSet.next()){
+                plantRecord.setValuesFromResultSet(resultSet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
 }

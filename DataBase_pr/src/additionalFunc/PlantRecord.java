@@ -33,6 +33,12 @@ public class PlantRecord {
         }
     }
 
+    public void setValuesFromStrings(String[] strings){
+        for (int i=0; i<strings.length && i<columns.length; i++){
+            values[i] = strings[i];
+        }
+    }
+
     public int putRecordInDb(){
         DataBaseInteraction.loadTableRow("PLANT", new ArrayList<String>(Arrays.asList(columns))
                                                 , new ArrayList<String>(Arrays.asList(values)));
