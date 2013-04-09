@@ -34,7 +34,8 @@ public class PlantRecord {
     }
 
     public void setValuesFromStrings(String[] strings){
-        for (int i=0; i<strings.length && i<columns.length; i++){
+        values = new String[columns.length];
+        for (int i=0; i<strings.length && i<values.length; i++){
             values[i] = strings[i];
         }
     }
@@ -51,6 +52,9 @@ public class PlantRecord {
 
     @Override
     public String toString() {
+        for (int i = 0; i<columns.length; i++){
+            System.out.println(columns[i] + "\t" + values[i]);
+        }
         return "PlantRecord{" +
                 "values=" + values +
                 '}';

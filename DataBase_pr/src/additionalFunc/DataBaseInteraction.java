@@ -21,8 +21,8 @@ public class DataBaseInteraction {
             Connection connection = DriverManager.getConnection(DB_URL, DB_DEFAULT_USER, DB_DEFAULT_PASSWORD);
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + table);
             ResultSet resultSet = statement.executeQuery();
-            statement.close();
-            connection.close();
+            //statement.close();
+            //connection.close();
             return resultSet;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -51,7 +51,7 @@ public class DataBaseInteraction {
         stringBuilder.append(values.get(0));
         for (int i=1; i<column.size(); i++){
             stringBuilder.append("', '");
-            stringBuilder.append(column.get(i));
+            stringBuilder.append(values.get(i));
         }
         stringBuilder.append("')");
 
@@ -61,7 +61,7 @@ public class DataBaseInteraction {
             Connection connection = DriverManager.getConnection(DB_URL, DB_DEFAULT_USER, DB_DEFAULT_PASSWORD);
             PreparedStatement statement = connection.prepareStatement(stringBuilder.toString());
             statement.executeUpdate();
-            connection.commit();
+            //connection.commit();   //not allowed in auto-commit mode
             statement.close();
             connection.close();
         } catch (ClassNotFoundException e) {
@@ -72,7 +72,7 @@ public class DataBaseInteraction {
         return 1;
     }
 
-    public static void main(){
+    public static void main(String args[]){
         PlantRecord plantRecord = new PlantRecord();
         plantRecord.setValuesFromStrings(new String[]{"ВВПУ", "81", "З", "15", "1", "7,9"
                                                     , "39", "10,2", "7,5", "0,74", "71,2", "1,5"
@@ -85,6 +85,7 @@ public class DataBaseInteraction {
         try {
             while (resultSet.next()){
                 plantRecord.setValuesFromResultSet(resultSet);
+                System.out.println(plantRecord);
             }
         } catch (SQLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
