@@ -19,7 +19,7 @@ public class DataBaseInteraction {
         try {
             Class.forName("org.firebirdsql.jdbc.FBDriver");
             Connection connection = DriverManager.getConnection(DB_URL, DB_DEFAULT_USER, DB_DEFAULT_PASSWORD);
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM PLANT");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + table);
             ResultSet resultSet = statement.executeQuery();
             statement.close();
             connection.close();
@@ -70,29 +70,5 @@ public class DataBaseInteraction {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
         return 1;
-    }
-
-    static public void main(String[] args) {
-        try {
-            Class.forName("org.firebirdsql.jdbc.FBDriver");
-            Connection connection = DriverManager.getConnection(DB_URL, DB_DEFAULT_USER, DB_DEFAULT_PASSWORD);
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM PLANT");
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                System.out.println("next");
-                PlantRecord plantRecord = new PlantRecord();
-                plantRecord.setFieldsFromResultSet(resultSet);
-                System.out.println(plantRecord);
-            }
-            statement = connection.prepareStatement("INSERT INTO PLANT (MARK, FABRIC_ID, PLANT_TYPE) VALUES ('ВПУ', '281', 'З')");
-            statement.executeUpdate();
-            connection.commit();
-            statement.close();
-            connection.close();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
     }
 }
