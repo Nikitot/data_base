@@ -7,6 +7,19 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://C:/Program Files/Firebird/Jaybird-2.2.2JDK_1.7" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/Program Files/Firebird/Jaybird-2.2.2JDK_1.7" />
+        </SOURCES>
+        <jarDirectory url="file://C:/Program Files/Firebird/Jaybird-2.2.2JDK_1.7" recursive="false" />
+        <jarDirectory url="file://C:/Program Files/Firebird/Jaybird-2.2.2JDK_1.7" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
   </component>
 </module>
 
