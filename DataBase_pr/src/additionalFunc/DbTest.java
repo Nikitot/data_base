@@ -1,7 +1,5 @@
 package additionalFunc;
 
-import org.firebirdsql.pool.FBWrappingDataSource;
-
 import java.sql.*;
 
 /**
@@ -24,6 +22,9 @@ public class DbTest {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 System.out.println("next");
+                PlantRecord plantRecord = new PlantRecord();
+                plantRecord.setFieldsFromResultSet(resultSet);
+                System.out.println(plantRecord);
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
