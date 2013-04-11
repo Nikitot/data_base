@@ -41,9 +41,9 @@ public class mainFrm{
     }
     /*
     //Функция добавления строки в конец
-    private void addBlankRow(JTable table) {
+    private void addRow(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.addBlankRow(new Object[]{"", "", ""});
+        model.addRow(new Object[]{"", "", ""});
         table.setModel(model);
     }
     //Функция удаления i строки

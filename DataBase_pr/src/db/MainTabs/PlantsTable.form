@@ -18,7 +18,9 @@
           <component id="3d57" class="javax.swing.JTable" binding="plantsTable" custom-create="true">
             <constraints/>
             <properties>
+              <autoCreateColumnsFromModel value="true"/>
               <autoResizeMode value="0"/>
+              <cellSelectionEnabled value="true"/>
             </properties>
             <clientProperties>
               <JTable.autoStartsEdit class="java.lang.Boolean" value="false"/>

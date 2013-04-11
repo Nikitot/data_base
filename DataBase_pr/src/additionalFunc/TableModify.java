@@ -11,20 +11,10 @@ import javax.swing.table.DefaultTableModel;
  * To change this template use File | Settings | File Templates.
  */
 public class TableModify {
-    static public void addBlankRow(JTable table) {
+    static public void addRow(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.addRow(new Object[model.getColumnCount()]);
         table.setModel(model);
-    }
-
-    static public void addRow(JTable table, Object[] fields) {
-        if (fields.length == table.getColumnCount()){
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
-            model.addRow(fields);
-            table.setModel(model);
-        } else {
-            System.err.println("Wrong fields count");
-        }
     }
 
     //Функция удаления i строки
@@ -39,12 +29,8 @@ public class TableModify {
         table.setModel(new javax.swing.table.DefaultTableModel(data,columnNames));
         table.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         table.setFocusable(false);
-
-        return table;
-    }
-
-    static public JTable initTable(String[] columnNames) {
-        JTable table = initTable(null, columnNames);
+        for (int i = 0; i < 20; i++)
+            addRow(table);
 
         return table;
     }
