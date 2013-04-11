@@ -7,6 +7,8 @@ import additionalFunc.TableModify;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -24,7 +26,6 @@ public class PlantsTable {
             "Окисл перм   О2 мг/л", "рН", "Жесткость, мг-экв/л", "Минер-ция, мг/л", "Fe, мг/л", "Mn, мг/л", "Хлориды мг/л",
             "Сульф мг/л", "Аммиак  мг/л", "Источник (С, Р,О)", "КОЭ", "Шел-ть мг/л", "B        мг/л", "Br           мг/л",
             "Li        мг/л", "Ba      мг/л", "Si       мг/л"};
-    Object[][] data =   {{null}};
 
     private         JTable      plantsTable;
     private         JPanel      plantsTablePane;
@@ -155,7 +156,12 @@ public class PlantsTable {
     }
 
     private void createUIComponents() {
+
         plantsTable = TableModify.initTable(columnNames);
+        plantsTable.setAutoCreateRowSorter(true);
+        plantsTable.getTableHeader().setReorderingAllowed(false);
+        plantsTable.setColumnSelectionAllowed(true);
+        plantsTable.setRowSelectionAllowed(true);
         fillTableFromDb();
     }
 
