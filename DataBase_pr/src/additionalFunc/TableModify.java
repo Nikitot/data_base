@@ -17,6 +17,15 @@ public class TableModify {
         table.setModel(model);
     }
 
+//    static public void ovIsCellEditable(JTable table) {
+//        table = new javax.swing.JTable() {
+//            @Override
+//            public boolean isCellEditable(int rowIndex, int colIndex) {
+//                return false;
+//            }
+//        };
+//    }
+
     //Функция удаления i строки
     static public void removeRow(JTable table, int i) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
