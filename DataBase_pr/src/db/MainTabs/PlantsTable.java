@@ -1,14 +1,15 @@
 package db.MainTabs;
 
-import additionalFunc.DataBaseInteraction;
-import additionalFunc.PlantRecord;
 import additionalFunc.TableModify;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -45,10 +46,10 @@ public class PlantsTable {
     private double Mn = 0;
 
     public PlantsTable() {
-        findButton.addActionListener(new ActionListener() {
+        Find.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                actionFind("Мутность мг/л", Turbidity, deltaTurbidity);
-                actionFind("Цветность град", Chroma, deltaChroma);
+                actionFind("Мутность мг/л",Turbidity, deltaTurbidity);
+                actionFind("Цветность град",Chroma,deltaChroma);
                 actionFind("Окисл перм   О2 мг/л", Oxidation, deltaOxidation);
                 actionFind("Жесткость, мг-экв/л", Hardness, deltaHardness);
                 actionFind("Fe, мг/л", Fe, deltaFe);
@@ -109,18 +110,6 @@ public class PlantsTable {
     }
 
     private void createUIComponents() {
-        plantsTable = TableModify.initTable(columnNames);
-
-        PlantRecord plantRecord = new PlantRecord();
-        ResultSet resultSet = DataBaseInteraction.getAllTable("PLANT");
-        try {
-            while (resultSet.next()){
-                plantRecord.setValuesFromResultSet(resultSet);
-                System.out.println(plantRecord);
-                TableModify.addRow(plantsTable, plantRecord.getValues());
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+        plantsTable = TableModify.initTable(data, columnNames);
     }
 }
