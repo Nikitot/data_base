@@ -12,13 +12,16 @@ import javax.swing.table.DefaultTableModel;
  * Time: 22:24
  * To change this template use File | Settings | File Templates.
  */
-public class InputTable{
-    private static  String[]    columnNames= {"Наименование показателя", "Единицы измерения", "Исходная вода", "СанПиН 2.1.4.1074-01"};
+public class InputTable {
+    private static String[] columnNames = {"Наименование показателя", "Единицы измерения", "Исходная вода", "СанПиН 2.1.4.1074-01"};
 
-    Object[][] data =   {{null, null, null, null}};
+    private static String[] dataNames = {""};
 
-    private         JTable      inputTable;
-    private         JPanel      inputTablePane;
+    private static String[] measurNames = {""};
+    Object[][] data = {{null}};
+
+    private JTable inputTable;
+    private JPanel inputTablePane;
 
 
     public JTable getinputTable() {
@@ -35,8 +38,14 @@ public class InputTable{
 
     private void createUIComponents() {
         inputTable = TableModify.initTable(data, columnNames);
+        while (inputTable.getRowCount() < dataNames.length) {
+            TableModify.addRow(inputTable, data);
+        }
+        for (int i = 0; i < inputTable.getRowCount(); i++) {
+            inputTable.setValueAt(dataNames[i], i, 0);
+            inputTable.setValueAt(measurNames[i], i, 1);
+        }
+
+
     }
-
-
-
 }
