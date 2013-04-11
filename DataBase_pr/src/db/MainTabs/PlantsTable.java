@@ -30,6 +30,8 @@ public class PlantsTable {
     private         JPanel      plantsTablePane;
     private         JButton     findButton;
     private JButton addBlankRowButton;
+    private JButton uploadToDBButton;
+    private JButton updateFromDBButton;
 
     private double deltaTurbidity = 1; //delta мутности
     private double deltaChroma = 10; //delta цветности
@@ -50,7 +52,7 @@ public class PlantsTable {
             public void actionPerformed(ActionEvent e) {
                 actionFind("Мутность мг/л", Turbidity, deltaTurbidity);
                 actionFind("Цветность град", Chroma, deltaChroma);
-                actionFind("Окисл перм   О2 мг/л", Oxidation, deltaOxidation);
+                actionFind("Окисл перм О2 мг/л", Oxidation, deltaOxidation);
                 actionFind("Жесткость, мг-экв/л", Hardness, deltaHardness);
                 actionFind("Fe, мг/л", Fe, deltaFe);
                 actionFind("Mn, мг/л", Mn, deltaMn);
@@ -62,6 +64,43 @@ public class PlantsTable {
                 TableModify.addBlankRow(plantsTable);
             }
         });
+        uploadToDBButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (int i=0; i<plantsTable.getRowCount(); i++){
+                    uploadRowToDb(i);
+                }
+                TableModify.clearTable(plantsTable);
+                fillTableFromDb();
+            }
+        });
+        updateFromDBButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TableModify.clearTable(plantsTable);
+                fillTableFromDb();
+            }
+        });
+    }
+
+    private void uploadRowToDb(int i) {
+        String[] values = new String[plantsTable.getColumnCount()];
+        for (int j=0; j<plantsTable.getColumnCount(); j++){
+            values[j] = (String) plantsTable.getValueAt(i, j);
+        }
+        if (values[1] == null || values[1] == "") {
+            return;
+        }
+        PlantRecord plantRecord = new PlantRecord();
+        plantRecord.setValuesFromStrings(values);
+        int result = plantRecord.putRecordInDb(false);
+        if (result == -1){
+            int chose = JOptionPane.showConfirmDialog(plantsTablePane, "В БД запись о приборе " + values[1]
+                        + " уже существует. Обновить?", "Запись уже существует", JOptionPane.YES_NO_OPTION);
+            if (chose == JOptionPane.YES_OPTION){
+                plantRecord.putRecordInDb(true);
+            }
+        }
     }
 
     public void actionFind(String strName, double value, double deltaValue){
@@ -117,13 +156,15 @@ public class PlantsTable {
 
     private void createUIComponents() {
         plantsTable = TableModify.initTable(columnNames);
+        fillTableFromDb();
+    }
 
+    private void fillTableFromDb() {
         PlantRecord plantRecord = new PlantRecord();
         ResultSet resultSet = DataBaseInteraction.getAllTable("PLANT");
         try {
             while (resultSet.next()){
                 plantRecord.setValuesFromResultSet(resultSet);
-                System.out.println(plantRecord);
                 TableModify.addRow(plantsTable, plantRecord.getValues());
             }
         } catch (SQLException e) {

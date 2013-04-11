@@ -40,10 +40,23 @@ public class PlantRecord {
         }
     }
 
-    public int putRecordInDb(){
-        DataBaseInteraction.loadTableRow("PLANT", new ArrayList<String>(Arrays.asList(columns))
+    public int putRecordInDb(boolean forceLoad){
+        ResultSet resultSet = DataBaseInteraction.getAllTable("PLANT WHERE FABRIC_ID = " + values[1]);
+        try {
+            if (!resultSet.next()){
+                DataBaseInteraction.loadTableRow("PLANT", new ArrayList<String>(Arrays.asList(columns))
                                                 , new ArrayList<String>(Arrays.asList(values)));
-        return 1;
+            } else if (forceLoad) {
+                DataBaseInteraction.updateTableRow("PLANT", new ArrayList<String>(Arrays.asList(columns))
+                           , new ArrayList<String>(Arrays.asList(values)), columns[1] + " = " + values[1]);
+            } else {
+                return -1;
+            }
+            return 1;
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            return -2;
+        }
     }
 
     public String[] getValues() {

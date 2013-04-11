@@ -48,4 +48,12 @@ public class TableModify {
 
         return table;
     }
+
+    public static void clearTable(JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        while (model.getRowCount()>0){
+            model.removeRow(0);
+        }
+        table.setModel(model);
+    }
 }
