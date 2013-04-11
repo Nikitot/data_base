@@ -109,16 +109,18 @@ public class PlantsTable {
     }
 
     private void createUIComponents() {
+        plantsTable = TableModify.initTable(columnNames);
+
         PlantRecord plantRecord = new PlantRecord();
         ResultSet resultSet = DataBaseInteraction.getAllTable("PLANT");
         try {
             while (resultSet.next()){
                 plantRecord.setValuesFromResultSet(resultSet);
                 System.out.println(plantRecord);
+                TableModify.addRow(plantsTable, plantRecord.getValues());
             }
         } catch (SQLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        plantsTable = TableModify.initTable(data, columnNames);
     }
 }
