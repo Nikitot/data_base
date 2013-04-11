@@ -56,7 +56,6 @@ public class DataBaseInteraction {
         stringBuilder.append("')");
 
         try {
-
             Class.forName("org.firebirdsql.jdbc.FBDriver");
             Connection connection = DriverManager.getConnection(DB_URL, DB_DEFAULT_USER, DB_DEFAULT_PASSWORD);
             PreparedStatement statement = connection.prepareStatement(stringBuilder.toString());
@@ -79,7 +78,7 @@ public class DataBaseInteraction {
                                                     , "0", "7,34", "10,4", null, "Вод-д", null
                                                     , null, null, null, null, null, null});
         System.out.println(plantRecord);
-        plantRecord.putRecordInDb();
+        plantRecord.putRecordInDb(true);
         System.out.println("send to db");
         ResultSet resultSet = DataBaseInteraction.getAllTable("PLANT");
         try {
@@ -87,6 +86,39 @@ public class DataBaseInteraction {
                 plantRecord.setValuesFromResultSet(resultSet);
                 System.out.println(plantRecord);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
+
+    public static void updateTableRow(String table, ArrayList<String> columns, ArrayList<String> values, String conditions) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("UPDATE ");
+        stringBuilder.append(table);
+        stringBuilder.append(" SET ");
+        stringBuilder.append(columns.get(0));
+        stringBuilder.append(" = '");
+        stringBuilder.append(values.get(0));
+        for (int i=1; i<columns.size(); i++){
+            stringBuilder.append("', ");
+            stringBuilder.append(columns.get(i));
+            stringBuilder.append(" = '");
+            stringBuilder.append(values.get(i));
+        }
+        stringBuilder.append("' WHERE ");
+        stringBuilder.append(conditions);
+        System.out.println(stringBuilder);
+
+        try {
+            Class.forName("org.firebirdsql.jdbc.FBDriver");
+            Connection connection = DriverManager.getConnection(DB_URL, DB_DEFAULT_USER, DB_DEFAULT_PASSWORD);
+            PreparedStatement statement = connection.prepareStatement(stringBuilder.toString());
+            statement.executeUpdate();
+            //connection.commit();   //not allowed in auto-commit mode
+            statement.close();
+            connection.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         } catch (SQLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
