@@ -29,8 +29,12 @@ public class TableModify {
         table.setModel(new javax.swing.table.DefaultTableModel(data,columnNames));
         table.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         table.setFocusable(false);
-        for (int i = 0; i < 20; i++)
-            addRow(table);
+
+        return table;
+    }
+
+    static public JTable initTable(String[] columnNames) {
+        JTable table = initTable(new Object[][]{{null}}, columnNames);
 
         return table;
     }

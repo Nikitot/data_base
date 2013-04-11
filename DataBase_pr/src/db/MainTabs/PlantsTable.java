@@ -1,15 +1,14 @@
 package db.MainTabs;
 
+import additionalFunc.DataBaseInteraction;
+import additionalFunc.PlantRecord;
 import additionalFunc.TableModify;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -29,7 +28,7 @@ public class PlantsTable {
 
     private         JTable      plantsTable;
     private         JPanel      plantsTablePane;
-    private         JButton     Find;
+    private         JButton     findButton;
 
     private double deltaTurbidity = 1; //delta мутности
     private double deltaChroma = 10; //delta цветности
@@ -46,10 +45,10 @@ public class PlantsTable {
     private double Mn = 0;
 
     public PlantsTable() {
-        Find.addActionListener(new ActionListener() {
+        findButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                actionFind("Мутность мг/л",Turbidity, deltaTurbidity);
-                actionFind("Цветность град",Chroma,deltaChroma);
+                actionFind("Мутность мг/л", Turbidity, deltaTurbidity);
+                actionFind("Цветность град", Chroma, deltaChroma);
                 actionFind("Окисл перм   О2 мг/л", Oxidation, deltaOxidation);
                 actionFind("Жесткость, мг-экв/л", Hardness, deltaHardness);
                 actionFind("Fe, мг/л", Fe, deltaFe);
@@ -110,6 +109,16 @@ public class PlantsTable {
     }
 
     private void createUIComponents() {
+        PlantRecord plantRecord = new PlantRecord();
+        ResultSet resultSet = DataBaseInteraction.getAllTable("PLANT");
+        try {
+            while (resultSet.next()){
+                plantRecord.setValuesFromResultSet(resultSet);
+                System.out.println(plantRecord);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
         plantsTable = TableModify.initTable(data, columnNames);
     }
 }
