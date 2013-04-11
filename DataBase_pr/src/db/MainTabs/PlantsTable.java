@@ -29,6 +29,7 @@ public class PlantsTable {
     private         JTable      plantsTable;
     private         JPanel      plantsTablePane;
     private         JButton     findButton;
+    private JButton addBlankRowButton;
 
     private double deltaTurbidity = 1; //delta мутности
     private double deltaChroma = 10; //delta цветности
@@ -53,6 +54,12 @@ public class PlantsTable {
                 actionFind("Жесткость, мг-экв/л", Hardness, deltaHardness);
                 actionFind("Fe, мг/л", Fe, deltaFe);
                 actionFind("Mn, мг/л", Mn, deltaMn);
+            }
+        });
+        addBlankRowButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TableModify.addBlankRow(plantsTable);
             }
         });
     }
