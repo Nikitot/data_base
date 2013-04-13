@@ -128,18 +128,33 @@ public class PlantsTable {
 
             for (int j = 2; j < plantsTable.getRowCount(); j++) {
                 try {
-                    Scanner sc = new Scanner(plantsTable.getValueAt(j, i).toString());
-                    if (sc.hasNextDouble()) {
-                        Double nextDouble = sc.nextDouble();
-                        if (nextDouble > value + deltaValue || nextDouble < value - deltaValue) {
+                    String getv = plantsTable.getValueAt(j, i).toString();
+
+                    if (getv.indexOf("-") != -1) {
+                        getv = getv.replaceAll("-", " ");
+
+                        Scanner scan = new Scanner(getv);
+
+                        String part1 = scan.next();
+                        String part2 = scan.next();
+
+                        double doublePart1 = Double.parseDouble(part1);
+                        double doublePart2 = Double.parseDouble(part2);
+
+                        if (!(doublePart1 >= value - deltaValue && doublePart2 <= value + deltaValue)) {
                             TableModify.removeRow(plantsTable, j);
                         }
+
                     } else {
-                        String nextRange = sc.next();
-                        //анализ диапазона
+                        Double presentValue = Double.parseDouble(getv);
+                        if (presentValue > value + deltaValue || presentValue < value - deltaValue) {
+                            TableModify.removeRow(plantsTable, j);
+                        }
+
                     }
                 } catch (Exception ex) {
                     //JOptionPane.showMessageDialog(null,"Неверно введены параметры установки" + j,"Error",2);
+                    TableModify.removeRow(plantsTable, j);
                 }
             }
         }

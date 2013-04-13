@@ -39,20 +39,7 @@ public class mainFrm{
         frame.setVisible(true);
 
     }
-    /*
-    //Функция добавления строки в конец
-    private void addRow(JTable table) {
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.addRow(new Object[]{"", "", ""});
-        table.setModel(model);
-    }
-    //Функция удаления i строки
-    private void removeRow(JTable table, int i) {
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.removeRow(i);
-        table.setModel(model);
-    }
-    */
+
 
     private void createUIComponents() {
         plantsTable = new PlantsTable();
