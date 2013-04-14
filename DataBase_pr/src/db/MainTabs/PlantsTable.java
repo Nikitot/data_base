@@ -182,15 +182,14 @@ public class PlantsTable {
                 String cellValue = plantsTable.getValueAt(0, i).toString();
                 String cellDeltaValue = plantsTable.getValueAt(1, i).toString();
 
-                value = Double.parseDouble(cellValue);
-                deltaValue = Double.parseDouble(cellDeltaValue);
+                Scanner sc = new Scanner(cellValue);
+                value = sc.nextDouble();
+                sc = new Scanner(cellDeltaValue);
+                deltaValue = sc.nextDouble();
 
             } catch (Exception ex) {
-                if (i < 16) {
-                    filterCbh[i - 3].setSelected(false);
-                } else {
-                    filterCbh[i - 4].setSelected(false);
-                }
+                System.out.println("Error of parsing 0 and 1 rows");
+                //TableModify.removeRow(plantsTable,i);
             }
 
             for (int j = 2; j < plantsTable.getRowCount(); j++) {
@@ -210,18 +209,23 @@ public class PlantsTable {
 
                         if (!(doublePart1 >= value - deltaValue && doublePart2 <= value + deltaValue)) {
                             TableModify.removeRow(plantsTable, j);
+                            j--;
                         }
 
                     } else {
-                        Double presentValue = Double.parseDouble(getv);
-                        if (presentValue > value + deltaValue || presentValue < value - deltaValue) {
+                        Scanner scan = new Scanner(getv);
+                        Double presentValue = scan.nextDouble();
+                        //Double presentValue = Double.parseDouble(getv);
+                        if (presentValue > value + deltaValue || presentValue < value - deltaValue||getv.equals("*")) {
                             TableModify.removeRow(plantsTable, j);
+                            j--;
                         }
 
                     }
-                } catch (Exception ex) {
+                } catch (/*NumberFormatException*/Exception ex) {
                     //JOptionPane.showMessageDialog(null,"Неверно введены параметры установки" + j,"Error",2);
-                    //TableModify.removeRow(plantsTable, j);
+                    TableModify.removeRow(plantsTable, j);
+                    j--;
                 }
             }
         }
