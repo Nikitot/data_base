@@ -144,7 +144,7 @@ public class PlantsTable {
         for (int j=0; j<plantsTable.getColumnCount(); j++){
             values[j] = (String) plantsTable.getValueAt(i, j);
         }
-        if (values[1] == null || values[1] == "") {
+        if (values[1] == null || values[1].equals("")) {
             return;
         }
         PlantRecord plantRecord = new PlantRecord();
