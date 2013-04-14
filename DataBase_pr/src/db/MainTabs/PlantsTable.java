@@ -111,6 +111,11 @@ public class PlantsTable {
                     uploadRowToDb(i);
                 }
                 TableModify.clearTable(plantsTable);
+                TableModify.addBlankRow(plantsTable);
+                TableModify.addBlankRow(plantsTable);
+
+                loadValues("plants_table_values.txt", 0);
+                loadValues("delta_values.txt", 1);
                 fillTableFromDb();
             }
         });
@@ -118,6 +123,11 @@ public class PlantsTable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TableModify.clearTable(plantsTable);
+                TableModify.addBlankRow(plantsTable);
+                TableModify.addBlankRow(plantsTable);
+
+                loadValues("plants_table_values.txt", 0);
+                loadValues("delta_values.txt", 1);
                 fillTableFromDb();
             }
         });
