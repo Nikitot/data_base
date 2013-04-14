@@ -20,6 +20,7 @@
         <jarDirectory url="file://C:/Program Files/Firebird/Jaybird-2.2.2JDK_1.7" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="jaybird-full-2.2.2" level="project" />
   </component>
 </module>
 
