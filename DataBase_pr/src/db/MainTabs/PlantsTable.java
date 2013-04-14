@@ -5,11 +5,14 @@ import additionalFunc.PlantRecord;
 import additionalFunc.TableModify;
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -267,7 +270,62 @@ public class PlantsTable {
         restartChBs();
         plantsTable = TableModify.initTable(data, columnNames);
 
-        plantsTable.setAutoCreateRowSorter(true);
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(plantsTable.getModel()){
+            @Override
+            public Comparator<?> getComparator(int column) {
+                if (plantsTable.getColumnName(column).equals(columnNames[1])
+                        || plantsTable.getColumnName(column).equals(columnNames[3])
+                        || plantsTable.getColumnName(column).equals(columnNames[4])
+                        || plantsTable.getColumnName(column).equals(columnNames[5])
+                        || plantsTable.getColumnName(column).equals(columnNames[6])
+                        || plantsTable.getColumnName(column).equals(columnNames[7])
+                        || plantsTable.getColumnName(column).equals(columnNames[8])
+                        || plantsTable.getColumnName(column).equals(columnNames[9])
+                        || plantsTable.getColumnName(column).equals(columnNames[10])
+                        || plantsTable.getColumnName(column).equals(columnNames[11])
+                        || plantsTable.getColumnName(column).equals(columnNames[12])
+                        || plantsTable.getColumnName(column).equals(columnNames[13])
+                        || plantsTable.getColumnName(column).equals(columnNames[14])
+                        || plantsTable.getColumnName(column).equals(columnNames[15])
+                        || plantsTable.getColumnName(column).equals(columnNames[17])
+                        || plantsTable.getColumnName(column).equals(columnNames[18])
+                        || plantsTable.getColumnName(column).equals(columnNames[19])
+                        || plantsTable.getColumnName(column).equals(columnNames[20])
+                        || plantsTable.getColumnName(column).equals(columnNames[21])
+                        || plantsTable.getColumnName(column).equals(columnNames[22])
+                        || plantsTable.getColumnName(column).equals(columnNames[23])){
+                    return new Comparator<String>() {
+                        @Override
+                        public int compare(String s1, String s2) {
+                            double d1,d2;
+                            try{
+                                s1 = s1.replace(',', '.').replace('-', ' ');
+                                Scanner sc = new Scanner(s1);
+                                d1 = Double.parseDouble(sc.next())*100;
+                            } catch (Exception e) {
+                                return -1;
+                            }
+                            try{
+                                s2 = s2.replace(',', '.').replace('-', ' ');
+                                Scanner sc = new Scanner(s2);
+                                d2 = Double.parseDouble(sc.next())*100;
+                            } catch (Exception e) {
+                                return 1;
+                            }
+                            return (int)(d1-d2);
+
+                        }
+                    };
+
+                } else {
+                    return super.getComparator(column);    //To change body of overridden methods use File | Settings | File Templates.
+                }
+            }
+        };
+        //sorter.
+        plantsTable.setRowSorter(sorter);
+
+
         plantsTable.getTableHeader().setReorderingAllowed(false);
         plantsTable.setColumnSelectionAllowed(true);
         plantsTable.setRowSelectionAllowed(true);
