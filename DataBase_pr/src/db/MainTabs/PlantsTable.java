@@ -1,11 +1,15 @@
 package db.MainTabs;
 
+import additionalFunc.DataBaseInteraction;
+import additionalFunc.PlantRecord;
 import additionalFunc.TableModify;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -69,6 +73,9 @@ public class PlantsTable {
     private JCheckBox checkBox20;
 
     private JButton loadButton;
+    private JButton updateFromDBButton;
+    private JButton addBlankRowButton;
+    private JButton uploadToDBButton;
 //    private JButton clearButton;
 
     private JCheckBox[] filterCbh;
@@ -91,6 +98,29 @@ public class PlantsTable {
         loadValues("plants_table_values.txt", 0);
         loadValues("delta_values.txt", 1);
 
+        addBlankRowButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TableModify.addBlankRow(plantsTable);
+            }
+        });
+        uploadToDBButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (int i=0; i<plantsTable.getRowCount(); i++){
+                    uploadRowToDb(i);
+                }
+                TableModify.clearTable(plantsTable);
+                fillTableFromDb();
+            }
+        });
+        updateFromDBButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TableModify.clearTable(plantsTable);
+                fillTableFromDb();
+            }
+        });
 
         Find.addActionListener(new ActionListener() {
 
@@ -108,8 +138,41 @@ public class PlantsTable {
         });
 
     }
+    //by Vasya
+    private void uploadRowToDb(int i) {
+        String[] values = new String[plantsTable.getColumnCount()];
+        for (int j=0; j<plantsTable.getColumnCount(); j++){
+            values[j] = (String) plantsTable.getValueAt(i, j);
+        }
+        if (values[1] == null || values[1] == "") {
+            return;
+        }
+        PlantRecord plantRecord = new PlantRecord();
+        plantRecord.setValuesFromStrings(values);
+        int result = plantRecord.putRecordInDb(false);
+        if (result == -1){
+            int chose = JOptionPane.showConfirmDialog(plantsTablePane, "В БД запись о приборе " + values[1]
+                    + " уже существует. Обновить?", "Запись уже существует", JOptionPane.YES_NO_OPTION);
+            if (chose == JOptionPane.YES_OPTION){
+                plantRecord.putRecordInDb(true);
+            }
+        }
+    }
+    //by Vasya
+    private void fillTableFromDb() {
+        PlantRecord plantRecord = new PlantRecord();
+        ResultSet resultSet = DataBaseInteraction.getAllTable("PLANT");
+        try {
+            while (resultSet.next()){
+                plantRecord.setValuesFromResultSet(resultSet);
+                TableModify.addRow(plantsTable, plantRecord.getValues());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
 
-
+    //by Dh
     public void actionFind(int i) {
         double value = 0, deltaValue = 0;
         String columnName = plantsTable.getColumnName(i);
@@ -163,7 +226,7 @@ public class PlantsTable {
             }
         }
     }
-
+    //by Dh
     public void loadOridginData() {
         int[] columnNumber = {16, 4, 5, 6, 8, 7, 11, 12, 13, 14, 9, 10, 15, 18, 20, 21, 22, 23, 17};
 
@@ -193,8 +256,14 @@ public class PlantsTable {
     private void createUIComponents() {
         restartChBs();
         plantsTable = TableModify.initTable(data, columnNames);
-    }
 
+        plantsTable.setAutoCreateRowSorter(true);
+        plantsTable.getTableHeader().setReorderingAllowed(false);
+        plantsTable.setColumnSelectionAllowed(true);
+        plantsTable.setRowSelectionAllowed(true);
+        fillTableFromDb();
+    }
+    //by Dh
     private void saveValues(String fileName, int rowNubmer) {
         PrintWriter out;
         try {
@@ -208,7 +277,7 @@ public class PlantsTable {
         }
 
     }
-
+    //by Dh
     private void loadValues(String fileName, int rowNubmer) {
         BufferedReader in;
         try {

@@ -73,6 +73,8 @@ public class InputTable {
         loadValues("values.txt", 2);
         loadValues("sanpin.txt", 3);
 
+
+
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
