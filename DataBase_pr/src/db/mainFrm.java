@@ -19,7 +19,6 @@ import javax.swing.*;
 
 public class mainFrm{
 
-    //protected JScrollPane scPnInputData;
     private JPanel mainPane;
     private JTabbedPane tabbedPane;
     private PlantsTable plantsTable;

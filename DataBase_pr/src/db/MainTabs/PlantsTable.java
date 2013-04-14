@@ -5,11 +5,7 @@ import additionalFunc.TableModify;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.util.ArrayList;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -72,18 +68,13 @@ public class PlantsTable {
     private JCheckBox checkBox19;
     private JCheckBox checkBox20;
 
+    private JButton loadButton;
+//    private JButton clearButton;
+
     private JCheckBox[] filterCbh;
 
-
-    private double deltaTurbidity = 1; //delta мутности
-    private double deltaChroma = 10; //delta цветности
-    private double deltaOxidation = 2; //delta окисления
-    private double deltaHardness = 3; //delta жесткости
-    private double deltaFe = 2; //delta Fe
-    private double deltaMn = 1; //delta Mn
-
-
     public PlantsTable() {
+
         filterCbh = new JCheckBox[]{
                 checkBox1, checkBox2, checkBox3, checkBox4, checkBox5,
                 checkBox6, checkBox7, checkBox8, checkBox9, checkBox10,
@@ -91,18 +82,31 @@ public class PlantsTable {
                 checkBox16, checkBox17, checkBox18, checkBox19, checkBox20
         };
 
-        setTextsChBs();                 //подписываем чекбоксы
+        setTextsChBs();                                                                 //подписываем чекбоксы
 
 
         TableModify.addBlankRow(plantsTable);
         TableModify.addBlankRow(plantsTable);
+
+        loadValues("plants_table_values.txt", 0);
+        loadValues("delta_values.txt", 1);
 
 
         Find.addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent e) {
-                isSelectedChBs();       //осуществляем поиск исходя из фильтров
+                saveValues("plants_table_values.txt", 0);                               //сохраняем данные первой строки
+                saveValues("delta_values.txt", 1);                                      //сохраняе данные второй строки
+                isSelectedChBs();                                                       //осуществляем поиск исходя из фильтров
             }
         });
+        loadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loadOridginData();
+            }
+        });
+
     }
 
 
@@ -154,9 +158,31 @@ public class PlantsTable {
                     }
                 } catch (Exception ex) {
                     //JOptionPane.showMessageDialog(null,"Неверно введены параметры установки" + j,"Error",2);
-                    TableModify.removeRow(plantsTable, j);
+                    //TableModify.removeRow(plantsTable, j);
                 }
             }
+        }
+    }
+
+    public void loadOridginData() {
+        int[] columnNumber = {16, 4, 5, 6, 8, 7, 11, 12, 13, 14, 9, 10, 15, 18, 20, 21, 22, 23, 17};
+
+        BufferedReader in;
+        try {
+            in = new BufferedReader(new FileReader(new File("values.txt").getAbsoluteFile()));
+            try {
+                for (int j = 0; j < columnNumber.length; j++) {
+                    String str = in.readLine();
+                    if (str.equals("null")) {
+                        str = "";
+                    }
+                    plantsTable.setValueAt(str, 0, columnNumber[j]);
+                }
+            } catch (Exception ex) {
+                in.close();
+            }
+            in.close();
+        } catch (Exception ex) {
         }
     }
 
@@ -167,6 +193,40 @@ public class PlantsTable {
     private void createUIComponents() {
         restartChBs();
         plantsTable = TableModify.initTable(data, columnNames);
+    }
+
+    private void saveValues(String fileName, int rowNubmer) {
+        PrintWriter out;
+        try {
+            out = new PrintWriter(new File(fileName).getAbsoluteFile());
+
+            for (int i = 0; i < plantsTable.getColumnCount(); i++) {
+                out.println(plantsTable.getValueAt(rowNubmer, i));
+            }
+            out.close();
+        } catch (Exception ex) {
+        }
+
+    }
+
+    private void loadValues(String fileName, int rowNubmer) {
+        BufferedReader in;
+        try {
+            in = new BufferedReader(new FileReader(new File(fileName).getAbsoluteFile()));
+            for (int i = 0; i < plantsTable.getColumnCount(); i++) {
+                try {
+                    String str = in.readLine();
+                    if (str.equals("null")) {
+                        str = "";
+                    }
+                    plantsTable.setValueAt(str, rowNubmer, i);
+                } catch (Exception ex) {
+                    in.close();
+                }
+            }
+            in.close();
+        } catch (Exception ex) {
+        }
     }
 
     private void restartChBs() {
