@@ -117,8 +117,6 @@ public class PlantsTable {
                     uploadRowToDb(i);
                 }
                 TableModify.clearTable(plantsTable);
-                //TableModify.addBlankRow(plantsTable);
-                //TableModify.addBlankRow(plantsTable);
                 TableModify.addBlankRow(inDataTable);
 
                 loadValues("plants_table_values.txt", 0);
