@@ -9,6 +9,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -95,10 +96,6 @@ public class PlantsTable {
         };
 
         setTextsChBs();                                                                 //подписываем чекбоксы
-
-
-//        TableModify.addBlankRow(plantsTable);
-//        TableModify.addBlankRow(plantsTable);
         TableModify.addBlankRow(inDataTable);
 
         loadValues("plants_table_values.txt", 0);
@@ -124,28 +121,7 @@ public class PlantsTable {
                 setRowsFromDb();
             }
         });
-        updateFromDBButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TableModify.clearTable(plantsTable);
-//                TableModify.addBlankRow(plantsTable);
-//                TableModify.addBlankRow(plantsTable);
 
-                loadValues("plants_table_values.txt", 0);
-                loadValues("delta_values.txt", 1);
-
-                setRowsFromDb();
-            }
-        });
-
-        Find.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                saveValues("plants_table_values.txt", 0);                               //сохраняем данные первой строки
-                saveValues("delta_values.txt", 1);                                      //сохраняе данные второй строки
-                isSelectedChBs();                                                       //осуществляем поиск исходя из фильтров
-            }
-        });
         loadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -155,6 +131,27 @@ public class PlantsTable {
             }
         });
 
+        for (int i = 0; i < filterCbh.length; i++) {
+            final int finalI = i;
+            filterCbh[i].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (filterCbh[finalI].isSelected()) {
+                        saveValues("plants_table_values.txt", 0);                               //сохраняем данные первой строки
+                        saveValues("delta_values.txt", 1);                                      //сохраняе данные второй строки
+                        isSelectedChBs();                                                       //осуществляем поиск исходя из фильтров
+                    } else {
+                        TableModify.clearTable(plantsTable);
+
+                        loadValues("plants_table_values.txt", 0);
+                        loadValues("delta_values.txt", 1);
+
+                        setRowsFromDb();
+
+                    }
+                }
+            });
+        }
     }
 
     //by Vasya
@@ -199,30 +196,45 @@ public class PlantsTable {
                 //TableModify.removeRow(plantsTable,i);
             }
 
-            for (int j = 2; j < plantsTable.getRowCount(); j++) {
+            for (int j = 0; j < plantsTable.getRowCount(); j++) {
                 try {
                     String getv = plantsTable.getValueAt(j, i).toString();
+                    if (getv.indexOf('.') != -1) {
+                        getv = getv.substring(0, getv.indexOf('.')) + "," + getv.substring((getv.indexOf('.') + 1));
+                    }
+                    boolean dash = false;
 
-                    if (getv.indexOf("-") != -1) {
-                        getv = getv.replaceAll("-", " ");
+                    //if (getv.indexOf("-") != -1) {
+                    for (int k = 0; k < getv.length(); k++) {
+                        char symbol = getv.toCharArray()[k];
 
+                        if (!(Character.isDigit(symbol) || symbol == ',')) {
+
+                            //getv = getv.replaceAll(symbol, " ");
+                            getv = getv.substring(0, k) + " " + getv.substring(k + 1);
+                            dash = true;
+                        }
+                    }
+                    if (dash) {
                         Scanner scan = new Scanner(getv);
 
-                        String part1 = scan.next();
-                        String part2 = scan.next();
+//                        String part1 = scan.next();
+//                        String part2 = scan.next();
 
-                        double doublePart1 = Double.parseDouble(part1);
-                        double doublePart2 = Double.parseDouble(part2);
+//                        double doublePart1 = Double.parseDouble(part1);
+//                        double doublePart2 = Double.parseDouble(part2);
+
+                        double doublePart1 = scan.nextDouble();
+                        double doublePart2 = scan.nextDouble();
+
 
                         if (!(doublePart1 >= value - deltaValue && doublePart2 <= value + deltaValue)) {
                             TableModify.removeRow(plantsTable, j);
                             j--;
                         }
-
                     } else {
                         Scanner scan = new Scanner(getv);
                         Double presentValue = scan.nextDouble();
-                        //Double presentValue = Double.parseDouble(getv);
                         if (presentValue > value + deltaValue || presentValue < value - deltaValue || getv.equals("*")) {
                             TableModify.removeRow(plantsTable, j);
                             j--;
@@ -270,9 +282,9 @@ public class PlantsTable {
         restartChBs();
 
         inDataTable = TableModify.initTable(data, columnNames);
-        plantsTable = TableModify.initTable(data, columnNames);
+        plantsTable = TableModify.initTable(columnNames);
 
-        setSorter();
+        //setSorter();
 
         plantsTable.getTableHeader().setReorderingAllowed(false);
         plantsTable.setColumnSelectionAllowed(true);
@@ -376,7 +388,6 @@ public class PlantsTable {
 
     private void restartChBs() {
         checkBox1 = new JCheckBox();
-        checkBox1 = new JCheckBox();
         checkBox2 = new JCheckBox();
         checkBox3 = new JCheckBox();
         checkBox4 = new JCheckBox();
@@ -421,7 +432,7 @@ public class PlantsTable {
         }
     }
 
-    private void setRowsFromDb (){
+    private void setRowsFromDb() {
         TableModify.fillTableFromDb(plantsTable, "PLANT");
     }
 }
