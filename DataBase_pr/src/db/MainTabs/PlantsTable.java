@@ -9,6 +9,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -79,6 +80,8 @@ public class PlantsTable {
     private JButton updateFromDBButton;
     private JButton addBlankRowButton;
     private JButton uploadToDBButton;
+    private JTable inDataTable;
+    private JScrollPane jsc;
 //    private JButton clearButton;
 
     private JCheckBox[] filterCbh;
@@ -93,10 +96,7 @@ public class PlantsTable {
         };
 
         setTextsChBs();                                                                 //подписываем чекбоксы
-
-
-        TableModify.addBlankRow(plantsTable);
-        TableModify.addBlankRow(plantsTable);
+        TableModify.addBlankRow(inDataTable);
 
         loadValues("plants_table_values.txt", 0);
         loadValues("delta_values.txt", 1);
@@ -110,51 +110,54 @@ public class PlantsTable {
         uploadToDBButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (int i=0; i<plantsTable.getRowCount(); i++){
+                for (int i = 0; i < plantsTable.getRowCount(); i++) {
                     uploadRowToDb(i);
                 }
                 TableModify.clearTable(plantsTable);
-                TableModify.addBlankRow(plantsTable);
-                TableModify.addBlankRow(plantsTable);
+                TableModify.addBlankRow(inDataTable);
 
                 loadValues("plants_table_values.txt", 0);
                 loadValues("delta_values.txt", 1);
-                fillTableFromDb();
-            }
-        });
-        updateFromDBButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TableModify.clearTable(plantsTable);
-                TableModify.addBlankRow(plantsTable);
-                TableModify.addBlankRow(plantsTable);
-
-                loadValues("plants_table_values.txt", 0);
-                loadValues("delta_values.txt", 1);
-                fillTableFromDb();
+                setRowsFromDb();
             }
         });
 
-        Find.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                saveValues("plants_table_values.txt", 0);                               //сохраняем данные первой строки
-                saveValues("delta_values.txt", 1);                                      //сохраняе данные второй строки
-                isSelectedChBs();                                                       //осуществляем поиск исходя из фильтров
-            }
-        });
         loadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 loadOridginData();
+                saveValues("plants_table_values.txt", 0);                               //сохраняем данные первой строки
+                saveValues("delta_values.txt", 1);                                      //сохраняе данные второй строки
             }
         });
 
+        for (int i = 0; i < filterCbh.length; i++) {
+            final int finalI = i;
+            filterCbh[i].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (filterCbh[finalI].isSelected()) {
+                        saveValues("plants_table_values.txt", 0);                               //сохраняем данные первой строки
+                        saveValues("delta_values.txt", 1);                                      //сохраняе данные второй строки
+                        isSelectedChBs();                                                       //осуществляем поиск исходя из фильтров
+                    } else {
+                        TableModify.clearTable(plantsTable);
+
+                        loadValues("plants_table_values.txt", 0);
+                        loadValues("delta_values.txt", 1);
+
+                        setRowsFromDb();
+
+                    }
+                }
+            });
+        }
     }
+
     //by Vasya
     private void uploadRowToDb(int i) {
         String[] values = new String[plantsTable.getColumnCount()];
-        for (int j=0; j<plantsTable.getColumnCount(); j++){
+        for (int j = 0; j < plantsTable.getColumnCount(); j++) {
             values[j] = (String) plantsTable.getValueAt(i, j);
         }
         if (values[1] == null || values[1].equals("")) {
@@ -163,37 +166,25 @@ public class PlantsTable {
         PlantRecord plantRecord = new PlantRecord();
         plantRecord.setValuesFromStrings(values);
         int result = plantRecord.putRecordInDb(false);
-        if (result == -1){
+        if (result == -1) {
             int chose = JOptionPane.showConfirmDialog(plantsTablePane, "В БД запись о приборе " + values[1]
                     + " уже существует. Обновить?", "Запись уже существует", JOptionPane.YES_NO_OPTION);
-            if (chose == JOptionPane.YES_OPTION){
+            if (chose == JOptionPane.YES_OPTION) {
                 plantRecord.putRecordInDb(true);
             }
         }
     }
-    //by Vasya
-    private void fillTableFromDb() {
-        PlantRecord plantRecord = new PlantRecord();
-        ResultSet resultSet = DataBaseInteraction.getAllTable("PLANT");
-        try {
-            while (resultSet.next()){
-                plantRecord.setValuesFromResultSet(resultSet);
-                TableModify.addRow(plantsTable, plantRecord.getValues());
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-    }
+
 
     //by Dh
     public void actionFind(int i) {
         double value = 0, deltaValue = 0;
-        String columnName = plantsTable.getColumnName(i);
+        String columnName = inDataTable.getColumnName(i);
         if (columnName.equals(columnNames[i])) {
             try {
 
-                String cellValue = plantsTable.getValueAt(0, i).toString();
-                String cellDeltaValue = plantsTable.getValueAt(1, i).toString();
+                String cellValue = inDataTable.getValueAt(0, i).toString();
+                String cellDeltaValue = inDataTable.getValueAt(1, i).toString();
 
                 Scanner sc = new Scanner(cellValue);
                 value = sc.nextDouble();
@@ -205,31 +196,46 @@ public class PlantsTable {
                 //TableModify.removeRow(plantsTable,i);
             }
 
-            for (int j = 2; j < plantsTable.getRowCount(); j++) {
+            for (int j = 0; j < plantsTable.getRowCount(); j++) {
                 try {
                     String getv = plantsTable.getValueAt(j, i).toString();
+                    if (getv.indexOf('.') != -1) {
+                        getv = getv.substring(0, getv.indexOf('.')) + "," + getv.substring((getv.indexOf('.') + 1));
+                    }
+                    boolean dash = false;
 
-                    if (getv.indexOf("-") != -1) {
-                        getv = getv.replaceAll("-", " ");
+                    //if (getv.indexOf("-") != -1) {
+                    for (int k = 0; k < getv.length(); k++) {
+                        char symbol = getv.toCharArray()[k];
 
+                        if (!(Character.isDigit(symbol) || symbol == ',')) {
+
+                            //getv = getv.replaceAll(symbol, " ");
+                            getv = getv.substring(0, k) + " " + getv.substring(k + 1);
+                            dash = true;
+                        }
+                    }
+                    if (dash) {
                         Scanner scan = new Scanner(getv);
 
-                        String part1 = scan.next();
-                        String part2 = scan.next();
+//                        String part1 = scan.next();
+//                        String part2 = scan.next();
 
-                        double doublePart1 = Double.parseDouble(part1);
-                        double doublePart2 = Double.parseDouble(part2);
+//                        double doublePart1 = Double.parseDouble(part1);
+//                        double doublePart2 = Double.parseDouble(part2);
+
+                        double doublePart1 = scan.nextDouble();
+                        double doublePart2 = scan.nextDouble();
+
 
                         if (!(doublePart1 >= value - deltaValue && doublePart2 <= value + deltaValue)) {
                             TableModify.removeRow(plantsTable, j);
                             j--;
                         }
-
                     } else {
                         Scanner scan = new Scanner(getv);
                         Double presentValue = scan.nextDouble();
-                        //Double presentValue = Double.parseDouble(getv);
-                        if (presentValue > value + deltaValue || presentValue < value - deltaValue||getv.equals("*")) {
+                        if (presentValue > value + deltaValue || presentValue < value - deltaValue || getv.equals("*")) {
                             TableModify.removeRow(plantsTable, j);
                             j--;
                         }
@@ -243,6 +249,7 @@ public class PlantsTable {
             }
         }
     }
+
     //by Dh
     public void loadOridginData() {
         int[] columnNumber = {16, 4, 5, 6, 8, 7, 11, 12, 13, 14, 9, 10, 15, 18, 20, 21, 22, 23, 17};
@@ -256,7 +263,7 @@ public class PlantsTable {
                     if (str.equals("null")) {
                         str = "";
                     }
-                    plantsTable.setValueAt(str, 0, columnNumber[j]);
+                    inDataTable.setValueAt(str, 0, columnNumber[j]);
                 }
             } catch (Exception ex) {
                 in.close();
@@ -271,10 +278,23 @@ public class PlantsTable {
     }
 
     private void createUIComponents() {
+        inDataTable = new JTable();
         restartChBs();
-        plantsTable = TableModify.initTable(data, columnNames);
 
-        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(plantsTable.getModel()){
+        inDataTable = TableModify.initTable(data, columnNames);
+        plantsTable = TableModify.initTable(columnNames);
+
+        //setSorter();
+
+        plantsTable.getTableHeader().setReorderingAllowed(false);
+        plantsTable.setColumnSelectionAllowed(true);
+        plantsTable.setRowSelectionAllowed(true);
+
+        setRowsFromDb();
+    }
+
+    private void setSorter() {
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(plantsTable.getModel()) {
             @Override
             public Comparator<?> getComparator(int column) {
                 if (plantsTable.getColumnName(column).equals(columnNames[1])
@@ -297,26 +317,26 @@ public class PlantsTable {
                         || plantsTable.getColumnName(column).equals(columnNames[20])
                         || plantsTable.getColumnName(column).equals(columnNames[21])
                         || plantsTable.getColumnName(column).equals(columnNames[22])
-                        || plantsTable.getColumnName(column).equals(columnNames[23])){
+                        || plantsTable.getColumnName(column).equals(columnNames[23])) {
                     return new Comparator<String>() {
                         @Override
                         public int compare(String s1, String s2) {
-                            double d1,d2;
-                            try{
+                            double d1, d2;
+                            try {
                                 s1 = s1.replace(',', '.').replace('-', ' ');
                                 Scanner sc = new Scanner(s1);
-                                d1 = Double.parseDouble(sc.next())*100;
+                                d1 = Double.parseDouble(sc.next()) * 100;
                             } catch (Exception e) {
                                 return -1;
                             }
-                            try{
+                            try {
                                 s2 = s2.replace(',', '.').replace('-', ' ');
                                 Scanner sc = new Scanner(s2);
-                                d2 = Double.parseDouble(sc.next())*100;
+                                d2 = Double.parseDouble(sc.next()) * 100;
                             } catch (Exception e) {
                                 return 1;
                             }
-                            return (int)(d1-d2);
+                            return (int) (d1 - d2);
 
                         }
                     };
@@ -328,39 +348,35 @@ public class PlantsTable {
         };
         //sorter.
         plantsTable.setRowSorter(sorter);
-
-
-        plantsTable.getTableHeader().setReorderingAllowed(false);
-        plantsTable.setColumnSelectionAllowed(true);
-        plantsTable.setRowSelectionAllowed(true);
-        fillTableFromDb();
     }
+
     //by Dh
     private void saveValues(String fileName, int rowNubmer) {
         PrintWriter out;
         try {
             out = new PrintWriter(new File(fileName).getAbsoluteFile());
 
-            for (int i = 0; i < plantsTable.getColumnCount(); i++) {
-                out.println(plantsTable.getValueAt(rowNubmer, i));
+            for (int i = 0; i < inDataTable.getColumnCount(); i++) {
+                out.println(inDataTable.getValueAt(rowNubmer, i));
             }
             out.close();
         } catch (Exception ex) {
         }
 
     }
+
     //by Dh
     private void loadValues(String fileName, int rowNubmer) {
         BufferedReader in;
         try {
             in = new BufferedReader(new FileReader(new File(fileName).getAbsoluteFile()));
-            for (int i = 0; i < plantsTable.getColumnCount(); i++) {
+            for (int i = 0; i < inDataTable.getColumnCount(); i++) {
                 try {
                     String str = in.readLine();
                     if (str.equals("null")) {
                         str = "";
                     }
-                    plantsTable.setValueAt(str, rowNubmer, i);
+                    inDataTable.setValueAt(str, rowNubmer, i);
                 } catch (Exception ex) {
                     in.close();
                 }
@@ -371,7 +387,6 @@ public class PlantsTable {
     }
 
     private void restartChBs() {
-        checkBox1 = new JCheckBox();
         checkBox1 = new JCheckBox();
         checkBox2 = new JCheckBox();
         checkBox3 = new JCheckBox();
@@ -415,6 +430,9 @@ public class PlantsTable {
             else
                 filterCbh[i].setText(columnNames[i + 4]);
         }
-        ;
+    }
+
+    private void setRowsFromDb() {
+        TableModify.fillTableFromDb(plantsTable, "PLANT");
     }
 }

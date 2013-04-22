@@ -19,6 +19,7 @@ public class DataBaseInteraction {
 
     public static ResultSet getAllTable(String table) {
         try {
+            System.out.println(DB_URL);
             Class.forName("org.firebirdsql.jdbc.FBDriver");
             Connection connection = DriverManager.getConnection(DB_URL, DB_DEFAULT_USER, DB_DEFAULT_PASSWORD);
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + table);

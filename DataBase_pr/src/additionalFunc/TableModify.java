@@ -2,6 +2,8 @@ package additionalFunc;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -55,5 +57,19 @@ public class TableModify {
             model.removeRow(0);
         }
         table.setModel(model);
+    }
+
+    //by Vasya
+    public static void fillTableFromDb(JTable table, String tableName) {
+        PlantRecord plantRecord = new PlantRecord();
+        ResultSet resultSet = DataBaseInteraction.getAllTable(tableName);
+        try {
+            while (resultSet.next()) {
+                plantRecord.setValuesFromResultSet(resultSet);
+                TableModify.addRow(table, plantRecord.getValues());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
     }
 }
