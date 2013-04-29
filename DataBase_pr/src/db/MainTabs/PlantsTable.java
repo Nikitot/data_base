@@ -53,7 +53,6 @@ public class PlantsTable {
 
     private JTable plantsTable;
     private JPanel plantsTablePane;
-    private JButton Find;
 
     private JCheckBox checkBox1;
     private JCheckBox checkBox2;
@@ -77,7 +76,6 @@ public class PlantsTable {
     private JCheckBox checkBox20;
 
     private JButton loadButton;
-    private JButton updateFromDBButton;
     private JButton addBlankRowButton;
     private JButton uploadToDBButton;
     private JTable inDataTable;
@@ -156,6 +154,7 @@ public class PlantsTable {
 
     //by Vasya
     private void uploadRowToDb(int i) {
+        boolean rowIsNew = false;
         String[] values = new String[plantsTable.getColumnCount()];
         for (int j = 0; j < plantsTable.getColumnCount(); j++) {
             values[j] = (String) plantsTable.getValueAt(i, j);
@@ -165,12 +164,31 @@ public class PlantsTable {
         }
         PlantRecord plantRecord = new PlantRecord();
         plantRecord.setValuesFromStrings(values);
+
         int result = plantRecord.putRecordInDb(false);
         if (result == -1) {
-            int chose = JOptionPane.showConfirmDialog(plantsTablePane, "В БД запись о приборе " + values[1]
-                    + " уже существует. Обновить?", "Запись уже существует", JOptionPane.YES_NO_OPTION);
-            if (chose == JOptionPane.YES_OPTION) {
-                plantRecord.putRecordInDb(true);
+            try {
+                ResultSet resultSet = DataBaseInteraction.getFromDb(null, "PLANT", "FABRIC_ID = '" + values[1] + "'");
+                if (resultSet.next()) {
+                    for (int j = 0; j < values.length; j++){
+                        System.out.println(values[j] + "..." + resultSet.getString(j+2));
+                        if (!values[j].equals(resultSet.getString(j+2))) {
+                            System.err.println(values[j] + "..." + resultSet.getString(j+2));
+                            rowIsNew = true;
+                            break;
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                return;
+            }
+            if (rowIsNew) {
+                int chose = JOptionPane.showConfirmDialog(plantsTablePane, "В БД запись о приборе " + values[1]
+                        + " уже существует. Обновить?", "Запись уже существует", JOptionPane.YES_NO_OPTION);
+                if (chose == JOptionPane.YES_OPTION) {
+                    plantRecord.putRecordInDb(true);
+                }
             }
         }
     }
