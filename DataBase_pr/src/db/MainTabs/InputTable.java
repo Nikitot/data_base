@@ -3,9 +3,10 @@ package db.MainTabs;
 import additionalFunc.TableModify;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -41,7 +42,7 @@ public class InputTable {
             "Si",
             "КОЭ"};
 
-    private static String[] measurNames = {"АС- Р - О - М ",
+    private static final String[] measureNames = {"АС- Р - О - М ",
             "баллы",
             "мг/л",
             "градусы",
@@ -60,12 +61,16 @@ public class InputTable {
             "мг/л",
             "мг/л",
             ""};
+
+    private static final String[] rows = {};
+
     Object[][] data = {{null}};
 
     private JTable inputTable;
     private JPanel inputTablePane;
     private JButton saveButton;
     private JButton clearButton;
+    private JTable inputTableInPlantsTable;
 
 
     public InputTable() {
@@ -145,14 +150,31 @@ public class InputTable {
 
     private void createUIComponents() {
         inputTable = TableModify.initTable(data, columnNames);
+        inputTable.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                if (e.getType() == TableModelEvent.UPDATE) {
+                    System.out.println("update col = " + e.getColumn());
+                    if (e.getColumn() == 2) {
+                        int row = e.getFirstRow();
+                        System.out.println("Row = " + row);
+                        int targetCol[] = {13,1,2,3,5,4,8,9,10,11,6,7,12,15,17,18,19,20,14};
+                        inputTableInPlantsTable.setValueAt(inputTable.getValueAt(row, 2), 0, targetCol[row]);
+                    }
+                }
+
+            }
+        });
         while (inputTable.getRowCount() < dataNames.length) {
             TableModify.addBlankRow(inputTable);
         }
         for (int i = 0; i < inputTable.getRowCount(); i++) {
             inputTable.setValueAt(dataNames[i], i, 0);
-            inputTable.setValueAt(measurNames[i], i, 1);
+            inputTable.setValueAt(measureNames[i], i, 1);
         }
+    }
 
-
+    public void setInputTableInPlantsTable(JTable inputTableInPlantsTable) {
+        this.inputTableInPlantsTable = inputTableInPlantsTable;
     }
 }

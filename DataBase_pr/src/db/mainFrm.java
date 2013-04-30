@@ -45,6 +45,7 @@ public class mainFrm{
         inputTable = new InputTable();
         fsFrame = new FilteringSystemsFrame();
         laFrame = new LaTbFrame();
+        inputTable.setInputTableInPlantsTable(plantsTable.getInDataTable());
 
         tabbedPane = new JTabbedPane();
 
@@ -52,6 +53,5 @@ public class mainFrm{
         tabbedPane.add("БВПУ МВПУ", plantsTable.getPlantsTablePane());
         tabbedPane.add("СФУФМ", fsFrame.getPane());
         tabbedPane.add("ОСВЕТЛ",laFrame.getLaPane());
-        // TODO: place custom component creation code here
     }
 }

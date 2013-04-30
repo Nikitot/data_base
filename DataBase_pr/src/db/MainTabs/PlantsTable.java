@@ -451,4 +451,8 @@ public class PlantsTable {
     private void setRowsFromDb() {
         TableModify.fillTableFromDb(plantsTable, "PLANT");
     }
+
+    public JTable getInDataTable() {
+        return inDataTable;
+    }
 }
