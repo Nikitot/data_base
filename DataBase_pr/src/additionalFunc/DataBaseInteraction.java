@@ -57,6 +57,7 @@ public class DataBaseInteraction {
             stringBuilder.append(values.get(i));
         }
         stringBuilder.append("')");
+        System.out.println(stringBuilder);
 
         try {
             Class.forName("org.firebirdsql.jdbc.FBDriver");
