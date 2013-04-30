@@ -53,36 +53,19 @@ public class PlantsTable {
 
     private JTable plantsTable;
     private JPanel plantsTablePane;
-    private JButton Find;
 
-    private JCheckBox checkBox1;
-    private JCheckBox checkBox2;
-    private JCheckBox checkBox3;
-    private JCheckBox checkBox4;
-    private JCheckBox checkBox5;
-    private JCheckBox checkBox6;
-    private JCheckBox checkBox7;
-    private JCheckBox checkBox8;
-    private JCheckBox checkBox9;
-    private JCheckBox checkBox10;
-    private JCheckBox checkBox11;
-    private JCheckBox checkBox12;
-    private JCheckBox checkBox13;
-    private JCheckBox checkBox14;
-    private JCheckBox checkBox15;
-    private JCheckBox checkBox16;
-    private JCheckBox checkBox17;
-    private JCheckBox checkBox18;
-    private JCheckBox checkBox19;
-    private JCheckBox checkBox20;
+    private JCheckBox
+            checkBox1, checkBox2, checkBox3, checkBox4, checkBox5,
+            checkBox6, checkBox7, checkBox8, checkBox9, checkBox10,
+            checkBox11, checkBox12, checkBox13, checkBox14, checkBox15,
+            checkBox16, checkBox17, checkBox18, checkBox19, checkBox20;
 
     private JButton loadButton;
-    private JButton updateFromDBButton;
     private JButton addBlankRowButton;
     private JButton uploadToDBButton;
     private JTable inDataTable;
     private JScrollPane jsc;
-//    private JButton clearButton;
+    private JButton button1;
 
     private JCheckBox[] filterCbh;
 
@@ -113,8 +96,8 @@ public class PlantsTable {
                 for (int i = 0; i < plantsTable.getRowCount(); i++) {
                     uploadRowToDb(i);
                 }
-                TableModify.clearTable(plantsTable);
-                TableModify.addBlankRow(inDataTable);
+//                TableModify.clearTable(plantsTable);
+//                TableModify.addBlankRow(inDataTable);
 
                 loadValues("plants_table_values.txt", 0);
                 loadValues("delta_values.txt", 1);
@@ -136,6 +119,7 @@ public class PlantsTable {
             filterCbh[i].addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    sorterRegulation(false);
                     if (filterCbh[finalI].isSelected()) {
                         saveValues("plants_table_values.txt", 0);                               //сохраняем данные первой строки
                         saveValues("delta_values.txt", 1);                                      //сохраняе данные второй строки
@@ -149,8 +133,17 @@ public class PlantsTable {
                         setRowsFromDb();
 
                     }
+                    sorterRegulation(true);
                 }
             });
+        }
+    }
+
+    private void sorterRegulation(boolean bool) {
+        TableRowSorter<TableModel> sorter = new TableRowSorter(plantsTable.getModel());
+        for (int k = 0; k < plantsTable.getColumnCount(); k++) {
+            sorter.setSortable(k, bool);
+            plantsTable.setRowSorter(sorter);
         }
     }
 
@@ -179,12 +172,12 @@ public class PlantsTable {
     //by Dh
     public void actionFind(int i) {
         double value = 0, deltaValue = 0;
-        String columnName = inDataTable.getColumnName(i);
+        String columnName = inDataTable.getColumnName(i - 3);
         if (columnName.equals(columnNames[i])) {
             try {
 
-                String cellValue = inDataTable.getValueAt(0, i).toString();
-                String cellDeltaValue = inDataTable.getValueAt(1, i).toString();
+                String cellValue = inDataTable.getValueAt(0, i - 3).toString();
+                String cellDeltaValue = inDataTable.getValueAt(1, i - 3).toString();
 
                 Scanner sc = new Scanner(cellValue);
                 value = sc.nextDouble();
@@ -193,7 +186,6 @@ public class PlantsTable {
 
             } catch (Exception ex) {
                 System.out.println("Error of parsing 0 and 1 rows");
-                //TableModify.removeRow(plantsTable,i);
             }
 
             for (int j = 0; j < plantsTable.getRowCount(); j++) {
@@ -204,31 +196,24 @@ public class PlantsTable {
                     }
                     boolean dash = false;
 
-                    //if (getv.indexOf("-") != -1) {
                     for (int k = 0; k < getv.length(); k++) {
                         char symbol = getv.toCharArray()[k];
 
                         if (!(Character.isDigit(symbol) || symbol == ',')) {
 
-                            //getv = getv.replaceAll(symbol, " ");
                             getv = getv.substring(0, k) + " " + getv.substring(k + 1);
                             dash = true;
                         }
                     }
                     if (dash) {
+
                         Scanner scan = new Scanner(getv);
-
-//                        String part1 = scan.next();
-//                        String part2 = scan.next();
-
-//                        double doublePart1 = Double.parseDouble(part1);
-//                        double doublePart2 = Double.parseDouble(part2);
 
                         double doublePart1 = scan.nextDouble();
                         double doublePart2 = scan.nextDouble();
 
 
-                        if (!(doublePart1 >= value - deltaValue && doublePart2 <= value + deltaValue)) {
+                        if ((!(doublePart1 >= value - deltaValue && doublePart2 <= value + deltaValue)) || doublePart2 <= doublePart1) {
                             TableModify.removeRow(plantsTable, j);
                             j--;
                         }
@@ -237,23 +222,33 @@ public class PlantsTable {
                         Double presentValue = scan.nextDouble();
                         if (presentValue > value + deltaValue || presentValue < value - deltaValue || getv.equals("*")) {
                             TableModify.removeRow(plantsTable, j);
+
                             j--;
                         }
 
                     }
-                } catch (/*NumberFormatException*/Exception ex) {
-                    //JOptionPane.showMessageDialog(null,"Неверно введены параметры установки" + j,"Error",2);
+                } catch (Exception ex) {
                     TableModify.removeRow(plantsTable, j);
                     j--;
                 }
             }
         }
+
+
+    }
+
+    private void printBeforeReject(int j) {
+        String rjLine = "";
+        for (int k = 0; k < plantsTable.getColumnCount(); k++) {
+            rjLine += plantsTable.getValueAt(j, k) + " ";
+        }
+        System.out.println(rjLine);
     }
 
     //by Dh
     public void loadOridginData() {
-        int[] columnNumber = {16, 4, 5, 6, 8, 7, 11, 12, 13, 14, 9, 10, 15, 18, 20, 21, 22, 23, 17};
-
+        //int[] columnNumber = {16, 4, 5, 6, 8, 7, 11, 12, 13, 14, 9, 10, 15, 18, 20, 21, 22, 23, 17};
+        int[] columnNumber = {13, 1, 2, 3, 5, 4, 8, 9, 10, 11, 6, 7, 12, 15, 17, 18, 19, 20, 14};
         BufferedReader in;
         try {
             in = new BufferedReader(new FileReader(new File("values.txt").getAbsoluteFile()));
@@ -281,10 +276,17 @@ public class PlantsTable {
         inDataTable = new JTable();
         restartChBs();
 
-        inDataTable = TableModify.initTable(data, columnNames);
+        //формируем имена для таблицы параметров поиска
+        String[] columnNamesInDataNames = new String[21];
+        for (int i = 0; i < columnNames.length - 3; i++) {
+            columnNamesInDataNames[i] = columnNames[i + 3];
+        }
+
+        inDataTable = TableModify.initTable(data, columnNamesInDataNames);
         plantsTable = TableModify.initTable(columnNames);
 
-        //setSorter();
+        setSorter();
+
 
         plantsTable.getTableHeader().setReorderingAllowed(false);
         plantsTable.setColumnSelectionAllowed(true);
@@ -337,17 +339,19 @@ public class PlantsTable {
                                 return 1;
                             }
                             return (int) (d1 - d2);
-
                         }
                     };
 
                 } else {
                     return super.getComparator(column);    //To change body of overridden methods use File | Settings | File Templates.
                 }
+
             }
+
         };
         //sorter.
         plantsTable.setRowSorter(sorter);
+
     }
 
     //by Dh
