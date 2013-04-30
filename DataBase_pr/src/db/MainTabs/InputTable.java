@@ -70,13 +70,13 @@ public class InputTable {
     private JPanel inputTablePane;
     private JButton saveButton;
     private JButton clearButton;
-    private JButton загрузитьИзФайлаButton;
+    private JButton loadFromFileButton;
     private JTable inputTableInPlantsTable;
 
 
     public InputTable() {
         //загружаем значение в таблицу из памяти
-        loadValues("values.txt", 2);
+//        loadValues("values.txt", 2);
         loadValues("sanpin.txt", 3);
 
 
@@ -90,17 +90,17 @@ public class InputTable {
             }
         });
 
-        clearButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // очистка вырбранного столбца
-                for (int i = 0; i < inputTable.getRowCount(); i++) {
-                    inputTable.setValueAt("", i, 2);
-                }
-                saveValues("values.txt",2);
-            }
-        });
-        загрузитьИзФайлаButton.addActionListener(new ActionListener() {
+//        clearButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                // очистка вырбранного столбца
+//                for (int i = 0; i < inputTable.getRowCount(); i++) {
+//                    inputTable.setValueAt("", i, 2);
+//                }
+//                saveValues("values.txt",2);
+//            }
+//        });
+        loadFromFileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 loadValues("values.txt", 2);
