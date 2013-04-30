@@ -36,6 +36,29 @@ public class DataBaseInteraction {
         }
     }
 
+    public static ResultSet getFromDb (String feilds, String from, String where) {
+        if (feilds == null) {
+            feilds = "*";
+        }
+        try {
+            System.out.println(DB_URL);
+            Class.forName("org.firebirdsql.jdbc.FBDriver");
+            Connection connection = DriverManager.getConnection(DB_URL, DB_DEFAULT_USER, DB_DEFAULT_PASSWORD);
+            PreparedStatement statement = connection.prepareStatement(String.format(
+                                                "SELECT %s FROM %s WHERE %s", feilds, from, where));
+            ResultSet resultSet = statement.executeQuery();
+            //statement.close();
+            //connection.close();
+            return resultSet;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            return null;
+        }
+    }
+
     public static int loadTableRow(String table, ArrayList<String> column, ArrayList<String> values) {
         if (column.size() != values.size()){
             return -1;
@@ -73,26 +96,6 @@ public class DataBaseInteraction {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
         return 1;
-    }
-
-    public static void main(String args[]){
-        PlantRecord plantRecord = new PlantRecord();
-        plantRecord.setValuesFromStrings(new String[]{"ВВПУ", "81", "З", "15", "1", "7,9"
-                , "39", "10,2", "7,5", "0,74", "71,2", "1,5"
-                , "0", "7,34", "10,4", null, "Вод-д", null
-                , null, null, null, null, null, null});
-        System.out.println(plantRecord);
-        plantRecord.putRecordInDb(true);
-        System.out.println("send to db");
-        ResultSet resultSet = DataBaseInteraction.getAllTable("PLANT");
-        try {
-            while (resultSet.next()){
-                plantRecord.setValuesFromResultSet(resultSet);
-                System.out.println(plantRecord);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
     }
 
     public static void updateTableRow(String table, ArrayList<String> columns, ArrayList<String> values, String conditions) {

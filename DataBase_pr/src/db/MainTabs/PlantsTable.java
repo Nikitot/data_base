@@ -65,7 +65,7 @@ public class PlantsTable {
     private JButton uploadToDBButton;
     private JTable inDataTable;
     private JScrollPane jsc;
-    private JButton button1;
+//    private JButton clearButton;
 
     private JCheckBox[] filterCbh;
 
@@ -149,6 +149,7 @@ public class PlantsTable {
 
     //by Vasya
     private void uploadRowToDb(int i) {
+        boolean rowIsNew = false;
         String[] values = new String[plantsTable.getColumnCount()];
         for (int j = 0; j < plantsTable.getColumnCount(); j++) {
             values[j] = (String) plantsTable.getValueAt(i, j);
@@ -158,12 +159,29 @@ public class PlantsTable {
         }
         PlantRecord plantRecord = new PlantRecord();
         plantRecord.setValuesFromStrings(values);
+
         int result = plantRecord.putRecordInDb(false);
         if (result == -1) {
-            int chose = JOptionPane.showConfirmDialog(plantsTablePane, "В БД запись о приборе " + values[1]
-                    + " уже существует. Обновить?", "Запись уже существует", JOptionPane.YES_NO_OPTION);
-            if (chose == JOptionPane.YES_OPTION) {
-                plantRecord.putRecordInDb(true);
+            try {
+                ResultSet resultSet = DataBaseInteraction.getFromDb(null, "PLANT", "FABRIC_ID = '" + values[1] + "'");
+                if (resultSet.next()) {
+                    for (int j = 0; j < values.length; j++){
+                        if (!values[j].equals(resultSet.getString(j+2))) {
+                            rowIsNew = true;
+                            break;
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                return;
+            }
+            if (rowIsNew) {
+                int chose = JOptionPane.showConfirmDialog(plantsTablePane, "В БД запись о приборе " + values[1]
+                        + " уже существует. Обновить?", "Запись уже существует", JOptionPane.YES_NO_OPTION);
+                if (chose == JOptionPane.YES_OPTION) {
+                    plantRecord.putRecordInDb(true);
+                }
             }
         }
     }
@@ -233,8 +251,6 @@ public class PlantsTable {
                 }
             }
         }
-
-
     }
 
     private void printBeforeReject(int j) {
@@ -286,7 +302,6 @@ public class PlantsTable {
         plantsTable = TableModify.initTable(columnNames);
 
         setSorter();
-
 
         plantsTable.getTableHeader().setReorderingAllowed(false);
         plantsTable.setColumnSelectionAllowed(true);
@@ -345,13 +360,10 @@ public class PlantsTable {
                 } else {
                     return super.getComparator(column);    //To change body of overridden methods use File | Settings | File Templates.
                 }
-
             }
-
         };
         //sorter.
         plantsTable.setRowSorter(sorter);
-
     }
 
     //by Dh
@@ -438,5 +450,9 @@ public class PlantsTable {
 
     private void setRowsFromDb() {
         TableModify.fillTableFromDb(plantsTable, "PLANT");
+    }
+
+    public JTable getInDataTable() {
+        return inDataTable;
     }
 }
