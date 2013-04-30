@@ -171,9 +171,7 @@ public class PlantsTable {
                 ResultSet resultSet = DataBaseInteraction.getFromDb(null, "PLANT", "FABRIC_ID = '" + values[1] + "'");
                 if (resultSet.next()) {
                     for (int j = 0; j < values.length; j++){
-                        System.out.println(values[j] + "..." + resultSet.getString(j+2));
                         if (!values[j].equals(resultSet.getString(j+2))) {
-                            System.err.println(values[j] + "..." + resultSet.getString(j+2));
                             rowIsNew = true;
                             break;
                         }

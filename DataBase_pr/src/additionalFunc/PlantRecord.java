@@ -41,12 +41,12 @@ public class PlantRecord {
     }
 
     public int putRecordInDb(boolean forceLoad){
-        ResultSet resultSet = DataBaseInteraction.getAllTable("PLANT WHERE FABRIC_ID = '" + values[1] + "'");
+        ResultSet resultSet = DataBaseInteraction.getFromDb(null, "PLANT", "FABRIC_ID = '" + values[1] + "'");
         try {
             if (resultSet.next()){
                 if (forceLoad) {
                     DataBaseInteraction.updateTableRow("PLANT", new ArrayList<String>(Arrays.asList(columns))
-                            , new ArrayList<String>(Arrays.asList(values)), columns[1] + " = " + values[1]);
+                            , new ArrayList<String>(Arrays.asList(values)), columns[1] + " = '" + values[1] + '\'');
                 } else {
                     return -1;
                 }
