@@ -81,7 +81,7 @@ public class PlantsTable {
         setTextsChBs();                                                                 //подписываем чекбоксы
         TableModify.addBlankRow(inDataTable);
 
-        loadValues("plants_table_values.txt", 0);
+        //loadValues("plants_table_values.txt", 0);
         loadValues("delta_values.txt", 1);
 
         addBlankRowButton.addActionListener(new ActionListener() {
