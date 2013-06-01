@@ -3,13 +3,13 @@ package db.MainTabs;
 import additionalFunc.DataBaseInteraction;
 import additionalFunc.PlantRecord;
 import additionalFunc.TableModify;
+import additionalFunc.EditDocx;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -65,7 +65,7 @@ public class PlantsTable {
     private JButton uploadToDBButton;
     private JTable inDataTable;
     private JScrollPane jsc;
-//    private JButton clearButton;
+    private JButton testDocxButton;
 
     private JCheckBox[] filterCbh;
 
@@ -137,6 +137,14 @@ public class PlantsTable {
                 }
             });
         }
+        testDocxButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EditDocx editDocx = new EditDocx();
+//              editDocx.editDocx("123",1);
+                editDocx.readAndSaveDocx();
+            }
+        });
     }
 
     private void sorterRegulation(boolean bool) {
@@ -165,8 +173,8 @@ public class PlantsTable {
             try {
                 ResultSet resultSet = DataBaseInteraction.getFromDb(null, "PLANT", "FABRIC_ID = '" + values[1] + "'");
                 if (resultSet.next()) {
-                    for (int j = 0; j < values.length; j++){
-                        if (!values[j].equals(resultSet.getString(j+2))) {
+                    for (int j = 0; j < values.length; j++) {
+                        if (!values[j].equals(resultSet.getString(j + 2))) {
                             rowIsNew = true;
                             break;
                         }
