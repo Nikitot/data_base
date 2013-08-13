@@ -44,7 +44,7 @@ public class LaTbFrame {
         // TODO: place custom component creation code here
     }
 
-    public JPanel getLaPane() {
+    public JPanel getPanel() {
         return laPane;
     }
 }
