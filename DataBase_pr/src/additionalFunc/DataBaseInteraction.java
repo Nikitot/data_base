@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 public class DataBaseInteraction {
-    private final static String DB_URL = "jdbc:firebirdsql://localhost:3050/" + new File("").getAbsolutePath() + "/DB.FDB";
+    private final static String DB_URL = "jdbc:firebirdsql://localhost:3050/" + new File("").getAbsolutePath() + "/DataBase_pr/DB.FDB";
 
     private final static String DB_DEFAULT_USER = "SYSDBA";
     private final static String DB_DEFAULT_PASSWORD = "masterkey";

@@ -90,7 +90,7 @@ public class EditDocx {
                     // метод isPageBreak всегда возвращает false,
                     // независимо от того, содержится ли разрыв страницы в параграфе или нет
                     // так что используем грязный хак
-                    p.setPageBreak(r.getCTR().toString().contains("<w:br w:type=\"page\"/>"));
+                    //????????????????//p.setPageBreak(r.getCTR().toString().contains("<w:br w:type=\"page\"/>"));
                 }
 
                 if (p.isPageBreak()) {
