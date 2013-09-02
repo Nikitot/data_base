@@ -78,7 +78,7 @@ public class SchemConstructor {
                         drawNDToFilters(!blockSubtypeName.equals("-"));
                     }
 
-                    BufferedImage image = ImageIO.read(new File("DataBase_pr\\schemes\\" + blockTypeCount + "-" + blockSubtypeName + ".png"));
+                    BufferedImage image = ImageIO.read(new File("schemes\\" + blockTypeCount + "-" + blockSubtypeName + ".png"));
 
 
                     addBlockToScheme(image, x, y);
@@ -92,7 +92,7 @@ public class SchemConstructor {
                     }
 
                 } catch (IOException el) {
-                    JOptionPane.showMessageDialog(null, "Отсутствует файл с изображением" + " DataBase_pr\\schemes\\" + blockTypeCount + "--.png", "Error", 0);
+                    JOptionPane.showMessageDialog(null, "Отсутствует файл с изображением" + " schemes\\" + blockTypeCount + "--.png", "Error", 0);
                 }
             }
         });
@@ -104,7 +104,7 @@ public class SchemConstructor {
                 for (int i = 0; i < blockSubtypeCount.length; i++) {
                     if (i != 5 && i != 6 && i != 8) {
                         try {
-                            BufferedImage image = ImageIO.read(new File("DataBase_pr\\schemes\\" + i + "--.png"));
+                            BufferedImage image = ImageIO.read(new File("schemes\\" + i + "--.png"));
                             int x = e.getX();
                             int y = e.getY();
                             int x1 = blockCoords[0][i];
@@ -123,7 +123,7 @@ public class SchemConstructor {
                                 }
                             }
                         } catch (IOException e1) {
-                            JOptionPane.showMessageDialog(null, "Отсутствует файл с изображением" + "DataBase_pr\\schemes\\" + i + "--.png", "Error", 0);
+                            JOptionPane.showMessageDialog(null, "Отсутствует файл с изображением" + "schemes\\" + i + "--.png", "Error", 0);
                         }
                     }
                 }
@@ -135,13 +135,13 @@ public class SchemConstructor {
         for (int i = 0; i < blockSubtypeCount.length; i++) {
             try {
                 if (i != 5 && i != 6 && i != 8) {
-                    BufferedImage image = ImageIO.read(new File("DataBase_pr\\schemes\\" + i + "--.png"));
+                    BufferedImage image = ImageIO.read(new File("schemes\\" + i + "--.png"));
                     int x = blockCoords[0][i];
                     int y = blockCoords[1][i];
                     imageScheme.getGraphics().drawImage(image, x, y, null, null);
                 }
             } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Отсутствует файл с изображением" + "DataBase_pr\\schemes\\" + i + "--.png", "Error", 0);
+                JOptionPane.showMessageDialog(null, "Отсутствует файл с изображением" + "schemes\\" + i + "--.png", "Error", 0);
             }
 
         }
