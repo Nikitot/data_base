@@ -7,24 +7,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="file://C:/Program Files/Firebird/Jaybird-2.2.2JDK_1.7" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://C:/Program Files/Firebird/Jaybird-2.2.2JDK_1.7" />
-        </SOURCES>
-        <jarDirectory url="file://C:/Program Files/Firebird/Jaybird-2.2.2JDK_1.7" recursive="false" />
-        <jarDirectory url="file://C:/Program Files/Firebird/Jaybird-2.2.2JDK_1.7" recursive="false" type="SOURCES" />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="jaybird-full-2.2.2" level="project" />
-    <orderEntry type="library" name="poi-ooxml-3.9-20121203" level="project" />
-    <orderEntry type="library" name="dom4j-1.6.1" level="project" />
     <orderEntry type="library" name="commons-codec-1.5" level="project" />
-    <orderEntry type="library" name="apidocs" level="project" />
+    <orderEntry type="library" name="dom4j-1.6.1" level="project" />
+    <orderEntry type="library" name="poi-3.9-20121203" level="project" />
+    <orderEntry type="library" name="jaybird-full-2.2.2" level="project" />
   </component>
 </module>
 
