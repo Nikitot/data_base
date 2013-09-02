@@ -1,12 +1,9 @@
 package db.MainTabs;
 
-import additionalFunc.TableModify;
-
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -20,9 +17,10 @@ import java.io.PrintWriter;
  * To change this template use File | Settings | File Templates.
  */
 public class InputTable {
-    private static String[] columnNames = {"Наименование показателя", "Единицы измерения", "Исходная вода", "СанПиН 2.1.4.1074-01"};
 
-    private static String[] dataNames = {"Тип источника",
+
+    private static String[] dataNames = {
+            "Тип источника",
             "Запах",
             "Мутность",
             "Цветность",
@@ -39,10 +37,12 @@ public class InputTable {
             "Br",
             "Li",
             "Ba",
+            "B",
             "Si",
             "КОЭ"};
 
-    private static final String[] measureNames = {"АС- Р - О - М ",
+    private static final String[] measureNames = {
+            "АС- Р - О - М ",
             "баллы",
             "мг/л",
             "градусы",
@@ -60,52 +60,33 @@ public class InputTable {
             "мг/л",
             "мг/л",
             "мг/л",
-            ""};
-
-    private static final String[] rows = {};
-
-    Object[][] data = {{null}};
+            "мг/л",
+            "-"};
 
     private JTable inputTable;
     private JPanel inputTablePane;
     private JButton saveButton;
-    private JButton clearButton;
-    private JButton loadFromFileButton;
     private JTable inputTableInPlantsTable;
 
 
     public InputTable() {
-        //загружаем значение в таблицу из памяти
-//        loadValues("values.txt", 2);
         loadValues("sanpin.txt", 3);
-
-
 
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //сохраняем значения значения и санпин
-                saveValues("values.txt", 2);
                 saveValues("sanpin.txt", 3);
             }
         });
-
-//        clearButton.addActionListener(new ActionListener() {
+//Тамер для прорисовки
+//        Timer updateTimer = new Timer(1000, new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent e) {
-//                // очистка вырбранного столбца
-//                for (int i = 0; i < inputTable.getRowCount(); i++) {
-//                    inputTable.setValueAt("", i, 2);
-//                }
-//                saveValues("values.txt",2);
+//
 //            }
 //        });
-        loadFromFileButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                loadValues("values.txt", 2);
-            }
-        });
+//        updateTimer.start();
     }
 
     private void saveValues(String fileName, int columnNubmer) {
@@ -117,7 +98,7 @@ public class InputTable {
                 out.println(inputTable.getValueAt(i, columnNubmer));
             }
             out.close();
-        } catch (Exception ex) {
+        } catch (Exception ignored) {
         }
 
     }
@@ -138,7 +119,7 @@ public class InputTable {
                 }
             }
             in.close();
-        } catch (Exception ex) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -147,43 +128,69 @@ public class InputTable {
         return inputTable;
     }
 
-    public String[] getColumnNames() {
-        return columnNames;
-    }
-
-    public JPanel getInputTablePane() {
+    public JPanel getPanel() {
         return inputTablePane;
     }
 
     private void createUIComponents() {
-        inputTable = TableModify.initTable(data, columnNames);
-        inputTable.getTableHeader().setReorderingAllowed(false);
-        inputTable.setColumnSelectionAllowed(true);
-        inputTable.setRowSelectionAllowed(true);
-        inputTable.getModel().addTableModelListener(new TableModelListener() {
+        final TableModel inputTableModel = new TableModel();
+
+        inputTableModel.setRowCount(dataNames.length);
+        inputTableModel.setColumnCount(4);
+        for (int i = 0; i < inputTableModel.getRowCount(); i++) {
+            inputTableModel.setValueAt(dataNames[i], i, 0);
+            inputTableModel.setValueAt(measureNames[i], i, 1);
+        }
+
+
+        inputTableModel.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
                 if (e.getType() == TableModelEvent.UPDATE) {
                     if (e.getColumn() == 2) {
                         int row = e.getFirstRow();
-                        int targetCol[] = {13,1,2,3,5,4,8,9,10,11,6,7,12,15,17,18,19,20,14};
-                        inputTableInPlantsTable.setValueAt(inputTable.getValueAt(row, 2), 0, targetCol[row]);
+                        int targetCol[] = {13, 1, 2, 3, 5, 4, 8, 9, 10, 11, 6, 7, 12, 15, 17, 18, 19, 16, 20, 14};
+                        if (row != 0) {
+                            try {
+                                String data = inputTableModel.getValueAt(row, 2).toString();
+                                data = data.replaceAll(",", ".");
+
+                                inputTableInPlantsTable.setValueAt(Double.parseDouble(data), 0, targetCol[row]);
+                            } catch (NumberFormatException ignored) {
+                            }
+                        } else {
+                            inputTableInPlantsTable.setValueAt(inputTableModel.getValueAt(row, 2), 0, targetCol[row]);
+                        }
+
                     }
                 }
 
             }
         });
-        while (inputTable.getRowCount() < dataNames.length) {
-            TableModify.addBlankRow(inputTable);
-        }
-        for (int i = 0; i < inputTable.getRowCount(); i++) {
-            inputTable.setValueAt(dataNames[i], i, 0);
-            inputTable.setValueAt(measureNames[i], i, 1);
-        }
+
+        inputTable = new JTable(inputTableModel);
+
+
+        inputTable.getTableHeader().setReorderingAllowed(false);
+        inputTable.setColumnSelectionAllowed(true);
+        inputTable.setRowSelectionAllowed(true);
 
     }
 
     public void setInputTableInPlantsTable(JTable inputTableInPlantsTable) {
         this.inputTableInPlantsTable = inputTableInPlantsTable;
+    }
+
+}
+
+class TableModel extends javax.swing.table.DefaultTableModel {
+    private static String[] columnNames = {"Наименование показателя", "Единицы измерения", "Исходная вода", "СанПиН 2.1.4.1074-01"};
+
+    public boolean isCellEditable(int row, int col) {
+        return !(col == 0 || col == 1);
+    }
+
+    public String getColumnName(int column) {
+        return columnNames[column];
     }
 }

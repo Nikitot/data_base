@@ -69,7 +69,7 @@ public class FilteringSystemsFrame {
         // TODO: place custom component creation code here
     }
 
-    public JPanel getPane() {
+    public JPanel getPanel() {
         return fsPane;
     }
 }

@@ -3,13 +3,13 @@ package db.MainTabs;
 import additionalFunc.DataBaseInteraction;
 import additionalFunc.PlantRecord;
 import additionalFunc.TableModify;
+import additionalFunc.EditDocx;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -49,7 +49,6 @@ public class PlantsTable {
             "Li, мг/л",
             "Ba, мг/л",
             "Si, мг/л"};
-    Object[][] data = {null};
 
     private JTable plantsTable;
     private JPanel plantsTablePane;
@@ -60,14 +59,16 @@ public class PlantsTable {
             checkBox11, checkBox12, checkBox13, checkBox14, checkBox15,
             checkBox16, checkBox17, checkBox18, checkBox19, checkBox20;
 
-    private JButton loadButton;
     private JButton addBlankRowButton;
     private JButton uploadToDBButton;
     private JTable inDataTable;
     private JScrollPane jsc;
-//    private JButton clearButton;
+    private JButton testDocxButton;
+    private JPanel filterPanel;
 
     private JCheckBox[] filterCbh;
+
+    JDialog filter = new JDialog();
 
     public PlantsTable() {
 
@@ -105,15 +106,6 @@ public class PlantsTable {
             }
         });
 
-        loadButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                loadOridginData();
-                saveValues("plants_table_values.txt", 0);                               //сохраняем данные первой строки
-                saveValues("delta_values.txt", 1);                                      //сохраняе данные второй строки
-            }
-        });
-
         for (int i = 0; i < filterCbh.length; i++) {
             final int finalI = i;
             filterCbh[i].addActionListener(new ActionListener() {
@@ -121,26 +113,34 @@ public class PlantsTable {
                 public void actionPerformed(ActionEvent e) {
                     sorterRegulation(false);
                     if (filterCbh[finalI].isSelected()) {
-                        saveValues("plants_table_values.txt", 0);                               //сохраняем данные первой строки
-                        saveValues("delta_values.txt", 1);                                      //сохраняе данные второй строки
+
                         isSelectedChBs();                                                       //осуществляем поиск исходя из фильтров
                     } else {
                         TableModify.clearTable(plantsTable);
-
                         loadValues("plants_table_values.txt", 0);
                         loadValues("delta_values.txt", 1);
-
                         setRowsFromDb();
+
+                        isSelectedChBs();
 
                     }
                     sorterRegulation(true);
                 }
             });
         }
+        testDocxButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EditDocx editDocx = new EditDocx();
+                editDocx.readAndSaveDocx();
+            }
+        });
+
+
     }
 
     private void sorterRegulation(boolean bool) {
-        TableRowSorter<TableModel> sorter = new TableRowSorter(plantsTable.getModel());
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(plantsTable.getModel());
         for (int k = 0; k < plantsTable.getColumnCount(); k++) {
             sorter.setSortable(k, bool);
             plantsTable.setRowSorter(sorter);
@@ -165,8 +165,8 @@ public class PlantsTable {
             try {
                 ResultSet resultSet = DataBaseInteraction.getFromDb(null, "PLANT", "FABRIC_ID = '" + values[1] + "'");
                 if (resultSet.next()) {
-                    for (int j = 0; j < values.length; j++){
-                        if (!values[j].equals(resultSet.getString(j+2))) {
+                    for (int j = 0; j < values.length; j++) {
+                        if (!values[j].equals(resultSet.getString(j + 2))) {
                             rowIsNew = true;
                             break;
                         }
@@ -253,54 +253,23 @@ public class PlantsTable {
         }
     }
 
-    private void printBeforeReject(int j) {
-        String rjLine = "";
-        for (int k = 0; k < plantsTable.getColumnCount(); k++) {
-            rjLine += plantsTable.getValueAt(j, k) + " ";
-        }
-        System.out.println(rjLine);
-    }
 
-    //by Dh
-    public void loadOridginData() {
-        //int[] columnNumber = {16, 4, 5, 6, 8, 7, 11, 12, 13, 14, 9, 10, 15, 18, 20, 21, 22, 23, 17};
-        int[] columnNumber = {13, 1, 2, 3, 5, 4, 8, 9, 10, 11, 6, 7, 12, 15, 17, 18, 19, 20, 14};
-        BufferedReader in;
-        try {
-            in = new BufferedReader(new FileReader(new File("values.txt").getAbsoluteFile()));
-            try {
-                for (int j = 0; j < columnNumber.length; j++) {
-                    String str = in.readLine();
-                    if (str.equals("null")) {
-                        str = "";
-                    }
-                    inDataTable.setValueAt(str, 0, columnNumber[j]);
-                }
-            } catch (Exception ex) {
-                in.close();
-            }
-            in.close();
-        } catch (Exception ex) {
-        }
-    }
-
-    public JPanel getPlantsTablePane() {
+    public JPanel getPanel() {
         return plantsTablePane;
     }
 
     private void createUIComponents() {
-        inDataTable = new JTable();
+        filterPanel = new JPanel();
+
+        final InDataTableModel inDataTableModel = new InDataTableModel();
+
+        inDataTableModel.setRowCount(1);
+        inDataTableModel.setColumnCount(columnNames.length - 3);
+
+        inDataTable = new JTable(inDataTableModel);
         restartChBs();
 
-        //формируем имена для таблицы параметров поиска
-        String[] columnNamesInDataNames = new String[21];
-        for (int i = 0; i < columnNames.length - 3; i++) {
-            columnNamesInDataNames[i] = columnNames[i + 3];
-        }
-
-        inDataTable = TableModify.initTable(data, columnNamesInDataNames);
         plantsTable = TableModify.initTable(columnNames);
-
         setSorter();
 
         plantsTable.getTableHeader().setReorderingAllowed(false);
@@ -376,7 +345,7 @@ public class PlantsTable {
                 out.println(inDataTable.getValueAt(rowNubmer, i));
             }
             out.close();
-        } catch (Exception ex) {
+        } catch (Exception ignored) {
         }
 
     }
@@ -398,34 +367,17 @@ public class PlantsTable {
                 }
             }
             in.close();
-        } catch (Exception ex) {
+        } catch (Exception ignored) {
         }
     }
 
     private void restartChBs() {
         checkBox1 = new JCheckBox();
-        checkBox2 = new JCheckBox();
-        checkBox3 = new JCheckBox();
-        checkBox4 = new JCheckBox();
-        checkBox5 = new JCheckBox();
-        checkBox6 = new JCheckBox();
-        checkBox7 = new JCheckBox();
-        checkBox8 = new JCheckBox();
-        checkBox9 = new JCheckBox();
-        checkBox10 = new JCheckBox();
-        checkBox11 = new JCheckBox();
-        checkBox12 = new JCheckBox();
-        checkBox13 = new JCheckBox();
-        checkBox14 = new JCheckBox();
-        checkBox15 = new JCheckBox();
-        checkBox15 = new JCheckBox();
-        checkBox16 = new JCheckBox();
-        checkBox17 = new JCheckBox();
-        checkBox18 = new JCheckBox();
-        checkBox19 = new JCheckBox();
     }
 
     private void isSelectedChBs() {
+        saveValues("plants_table_values.txt", 0);                               //сохраняем данные первой строки
+        saveValues("delta_values.txt", 1);                                      //сохраняе данные второй строки
         for (int i = 0; i < filterCbh.length; i++) {
             if (filterCbh[i].isSelected()) {
                 if (i < 12) {
@@ -454,5 +406,37 @@ public class PlantsTable {
 
     public JTable getInDataTable() {
         return inDataTable;
+    }
+}
+
+class InDataTableModel extends javax.swing.table.DefaultTableModel {
+    private static String[] columnNames = {
+            "Произв-ть, м3/чзс",
+            "Запах, баллы",
+            "Мутность, мг/л",
+            "Цветность, град",
+            "Окисл перм, О2 мг/л",
+            "рН",
+            "Жесткость, мг-экв/л",
+            "Минер-ция, мг/л",
+            "Fe, мг/л",
+            "Mn, мг/л",
+            "Хлориды, мг/л",
+            "Сульф, мг/л",
+            "Аммиак,  мг/л",
+            "Источник (С, Р,О)",
+            "КОЭ", "Шел-ть, мг/л",
+            "B, мг/л",
+            "Br, мг/л",
+            "Li, мг/л",
+            "Ba, мг/л",
+            "Si, мг/л"};
+
+    public boolean isCellEditable(int row, int col) {
+        return !(row == 0 && col > 0);
+    }
+
+    public String getColumnName(int column) {
+        return columnNames[column];
     }
 }

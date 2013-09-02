@@ -1,5 +1,6 @@
 package db;
 
+import db.MainTabs.ChangeSchematicBlocks.SchemConstructor;
 import db.MainTabs.FilteringSystemsFrame;
 import db.MainTabs.InputTable;
 import db.MainTabs.PlantsTable;
@@ -25,10 +26,7 @@ public class mainFrm{
     private InputTable inputTable;
     private FilteringSystemsFrame fsFrame;
     private LaTbFrame laFrame;
-
-    public mainFrm() {
-
-    }
+    private SchemConstructor scFrame;
 
     public static void main(String args[]){
         JFrame frame = new JFrame("PlantsTable");
@@ -45,13 +43,15 @@ public class mainFrm{
         inputTable = new InputTable();
         fsFrame = new FilteringSystemsFrame();
         laFrame = new LaTbFrame();
-        inputTable.setInputTableInPlantsTable(plantsTable.getInDataTable());
+        scFrame = new SchemConstructor();
 
+        inputTable.setInputTableInPlantsTable(plantsTable.getInDataTable());
         tabbedPane = new JTabbedPane();
 
-        tabbedPane.add("ИСХДАН", inputTable.getInputTablePane());
-        tabbedPane.add("БВПУ МВПУ", plantsTable.getPlantsTablePane());
-        tabbedPane.add("СФУФМ", fsFrame.getPane());
-        tabbedPane.add("ОСВЕТЛ",laFrame.getLaPane());
+        tabbedPane.add("ИСХДАН", inputTable.getPanel());
+        tabbedPane.add("БВПУ МВПУ", plantsTable.getPanel());
+        tabbedPane.add("КОН-Р СХЕМ",scFrame.getPanel());
+        tabbedPane.add("СФУФМ", fsFrame.getPanel());
+        tabbedPane.add("ОСВЕТЛ",laFrame.getPanel());
     }
 }
