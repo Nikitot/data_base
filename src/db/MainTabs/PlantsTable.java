@@ -48,7 +48,8 @@ public class PlantsTable {
             "Br, мг/л",
             "Li, мг/л",
             "Ba, мг/л",
-            "Si, мг/л"};
+            "Si, мг/л"
+    };
 
     private JTable plantsTable;
     private JPanel plantsTablePane;
@@ -102,7 +103,7 @@ public class PlantsTable {
 
                 loadValues("plants_table_values.txt", 0);
                 loadValues("delta_values.txt", 1);
-                setRowsFromDb();
+                fillRowsFromDb();
             }
         });
 
@@ -119,7 +120,7 @@ public class PlantsTable {
                         TableModify.clearTable(plantsTable);
                         loadValues("plants_table_values.txt", 0);
                         loadValues("delta_values.txt", 1);
-                        setRowsFromDb();
+                        fillRowsFromDb();
 
                         isSelectedChBs();
 
@@ -267,7 +268,7 @@ public class PlantsTable {
         inDataTableModel.setColumnCount(columnNames.length - 3);
 
         inDataTable = new JTable(inDataTableModel);
-        restartChBs();
+        resetCheckBox();
 
         plantsTable = TableModify.initTable(columnNames);
         setSorter();
@@ -276,7 +277,7 @@ public class PlantsTable {
         plantsTable.setColumnSelectionAllowed(true);
         plantsTable.setRowSelectionAllowed(true);
 
-        setRowsFromDb();
+        fillRowsFromDb();
     }
 
     private void setSorter() {
@@ -371,7 +372,7 @@ public class PlantsTable {
         }
     }
 
-    private void restartChBs() {
+    private void resetCheckBox() {
         checkBox1 = new JCheckBox();
     }
 
@@ -387,8 +388,6 @@ public class PlantsTable {
                 }
             }
         }
-
-
     }
 
     private void setTextsChBs() {
@@ -400,43 +399,43 @@ public class PlantsTable {
         }
     }
 
-    private void setRowsFromDb() {
-        TableModify.fillTableFromDb(plantsTable, "PLANT");
+    private void fillRowsFromDb() {
+        TableModify.fillTableFromDb(plantsTable, "PLANT", PlantRecord.COLUMNS);
     }
 
     public JTable getInDataTable() {
         return inDataTable;
     }
+    class InDataTableModel extends javax.swing.table.DefaultTableModel {
+        private final String[] columnNames = {
+                "Произв-ть, м3/чзс",
+                "Запах, баллы",
+                "Мутность, мг/л",
+                "Цветность, град",
+                "Окисл перм, О2 мг/л",
+                "рН",
+                "Жесткость, мг-экв/л",
+                "Минер-ция, мг/л",
+                "Fe, мг/л",
+                "Mn, мг/л",
+                "Хлориды, мг/л",
+                "Сульф, мг/л",
+                "Аммиак,  мг/л",
+                "Источник (С, Р,О)",
+                "КОЭ", "Шел-ть, мг/л",
+                "B, мг/л",
+                "Br, мг/л",
+                "Li, мг/л",
+                "Ba, мг/л",
+                "Si, мг/л"};
+
+        public boolean isCellEditable(int row, int col) {
+            return !(row == 0 && col > 0);
+        }
+
+        public String getColumnName(int column) {
+            return columnNames[column];
+        }
+    }
 }
 
-class InDataTableModel extends javax.swing.table.DefaultTableModel {
-    private static String[] columnNames = {
-            "Произв-ть, м3/чзс",
-            "Запах, баллы",
-            "Мутность, мг/л",
-            "Цветность, град",
-            "Окисл перм, О2 мг/л",
-            "рН",
-            "Жесткость, мг-экв/л",
-            "Минер-ция, мг/л",
-            "Fe, мг/л",
-            "Mn, мг/л",
-            "Хлориды, мг/л",
-            "Сульф, мг/л",
-            "Аммиак,  мг/л",
-            "Источник (С, Р,О)",
-            "КОЭ", "Шел-ть, мг/л",
-            "B, мг/л",
-            "Br, мг/л",
-            "Li, мг/л",
-            "Ba, мг/л",
-            "Si, мг/л"};
-
-    public boolean isCellEditable(int row, int col) {
-        return !(row == 0 && col > 0);
-    }
-
-    public String getColumnName(int column) {
-        return columnNames[column];
-    }
-}

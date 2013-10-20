@@ -38,7 +38,7 @@ public class TableModify {
 
     static public JTable initTable(Object[][] data, String[] columnNames) {
         JTable table = new javax.swing.JTable() {};
-        table.setModel(new javax.swing.table.DefaultTableModel(data,columnNames));
+        table.setModel(new javax.swing.table.DefaultTableModel(data, columnNames));
         table.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         table.setFocusable(false);
 
@@ -60,16 +60,22 @@ public class TableModify {
     }
 
     //by Vasya
-    public static void fillTableFromDb(JTable table, String tableName) {
-        PlantRecord plantRecord = new PlantRecord();
+    public static void fillTableFromDb(JTable table, String tableName, String[] columns) {
         ResultSet resultSet = DataBaseInteraction.getAllTable(tableName);
         try {
             while (resultSet.next()) {
-                plantRecord.setValuesFromResultSet(resultSet);
-                TableModify.addRow(table, plantRecord.getValues());
+                String[] values = new String[columns.length];
+                try {
+                    for (int i=0; i < columns.length; i++) {
+                        values[i] = resultSet.getString(columns[i]);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                TableModify.addRow(table, values);
             }
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
     }
 }
